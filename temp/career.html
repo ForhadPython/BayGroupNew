@@ -1,0 +1,93 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+{background: #fff !important;  transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
+</style>
+
+<main class="main" style="margin-top:4%; background:#f7f9fc; padding:60px 0; font-family:'Poppins',sans-serif;">
+
+  <div style="width:100%; max-width:1150px; margin:auto; background:#fff; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.08); padding:50px 40px;">
+
+    <div class="container section-title" data-aos="fade-up" style="text-align:center; margin-bottom:40px;">
+      <h2 style="font-weight:700; color:#1a1a1a; font-size:32px; letter-spacing:0.5px; margin-bottom:10px;">Career Opportunities</h2>
+      <p style="color:#777; font-size:15px;">Join our dynamic team and build your future with us.</p>
+    </div>
+
+    <table style="width:100%; border-collapse:collapse; font-size:15px; border-radius:12px; overflow:hidden;">
+      <thead>
+        <tr style="background:linear-gradient(90deg, #003366, #0066cc); color:#fff;">
+          <th style="text-align:left; padding:14px 18px;">Position</th>
+          <th style="text-align:left; padding:14px 18px;">Job Details</th>
+          <th style="text-align:center; padding:14px 18px;">Type</th>
+          <th style="text-align:center; padding:14px 18px;">Location</th>
+          <th style="text-align:center; padding:14px 18px;">Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Row 1 -->
+        <tr style="background:#fafafa; transition:all 0.3s ease;">
+          <td style="padding:16px 18px;">
+            <a href="#" style="color:#0044cc; font-weight:600; text-decoration:none;">Marketing Officer (AMO)</a>
+            <div style="font-size:12px; color:#999; margin-top:4px;">Posted: Nov 3, 2025</div>
+          </td>
+          <td style="padding:16px 18px; color:#555;">Build strong market presence, lead campaigns, and ensure consistent brand visibility across all territories.</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#007BFF; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">Full Time</span>
+          </td>
+          <td style="text-align:center; vertical-align:middle; color:#444;">Dhaka</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#E53935; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">16 Nov 2025</span>
+          </td>
+        </tr>
+
+        <!-- Row 2 -->
+        <tr style="background:#fff; transition:all 0.3s ease;">
+          <td style="padding:16px 18px;">
+            <a href="#" style="color:#0044cc; font-weight:600; text-decoration:none;">Sr. Software Engineer</a>
+            <div style="font-size:12px; color:#999; margin-top:4px;">Posted: Oct 28, 2025</div>
+          </td>
+          <td style="padding:16px 18px; color:#555;">Develop and maintain scalable web platforms using Django and React. Collaborate with cross-functional teams to deliver excellence.</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#007BFF; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">Full Time</span>
+          </td>
+          <td style="text-align:center; vertical-align:middle; color:#444;">Chattogram, Dhaka</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#FFB300; color:#000; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">30 Nov 2025</span>
+          </td>
+        </tr>
+
+        <!-- Row 3 -->
+        <tr style="background:#fafafa; transition:all 0.3s ease;">
+          <td style="padding:16px 18px;">
+            <a href="#" style="color:#0044cc; font-weight:600; text-decoration:none;">Civil Engineer (Officer)</a>
+            <div style="font-size:12px; color:#999; margin-top:4px;">Posted: Oct 15, 2025</div>
+          </td>
+          <td style="padding:16px 18px; color:#555;">Oversee construction, renovation, and interior projects. Ensure design integrity and timely project completion.</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#007BFF; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">Full Time</span>
+          </td>
+          <td style="text-align:center; vertical-align:middle; color:#444;">Chattogram</td>
+          <td style="text-align:center; vertical-align:middle;">
+            <span style="display:inline-block; background:#43A047; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:16px;">Active</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div style="text-align:center; margin-top:45px; color:#666;">
+      <p style="font-size:15px; font-weight:600;">Currently, there are no other vacancies available.</p>
+      <p style="font-size:14px; margin:8px 0;">We are always keen to meet energetic and talented professionals who would like to join our team.</p>
+      <p style="font-size:14px;">Please send your CV and cover letter to:
+        <a href="mailto:career@yourcompany.com" style="color:#0044cc; text-decoration:none; font-weight:600;">career@yourcompany.com</a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+{% endblock %}

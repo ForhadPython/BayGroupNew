@@ -1,0 +1,70 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+{background: #fff !important;  transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
+</style>
+
+<main class="main" style="margin: 5%;">
+
+  <!-- CSR Section -->
+  <section style="background:#f9f9f9; padding:100px 0;">
+    <div class="container">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>CSR</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><br/><br/>
+
+      {% for item in csr_items %}
+      <div class="row align-items-center mb-5">
+
+        {% if forloop.counter|divisibleby:2 %}
+        <!-- Even Row: Text Left, Image Right -->
+        <div class="col-md-6" style="padding:30px;">
+          <h4 style="color:#000000; font-weight:700; margin-bottom:15px;">{{ item.title }}</h4>
+          <p style="color:#555; font-size:15px; line-height:1.8;">
+            {{ item.description|linebreaks }}
+          </p>
+          {% if item.button_link %}
+          <a href="{{ item.button_link }}" target="_blank" class="btn btn-primary mt-3"
+            style="border-radius:25px; padding:10px 25px; font-size:14px; font-weight:600; background-color:#e84545">
+            See More
+          </a>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+        </div>
+
+        {% else %}
+        <!-- Odd Row: Image Left, Text Right -->
+        <div class="col-md-6">
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
+        </div>
+        <div class="col-md-6" style="padding:30px;">
+          <h4 style="color:#000000; font-weight:700; margin-bottom:15px;">{{ item.title }}</h4>
+          <p style="color:#555; font-size:15px; line-height:1.8;">
+            {{ item.description|linebreaks }}
+          </p>
+          {% if item.button_link %}
+          <a href="{{ item.button_link }}" target="_blank" class="btn btn-primary mt-3"
+            style="border-radius:25px; padding:10px 25px; font-size:14px; font-weight:600; background-color:#e84545">
+            See More
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+
+      </div><br/>
+      {% endfor %}
+
+    </div>
+  </section>
+
+</main>
+
+{% endblock %}

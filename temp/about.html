@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+{background: #fff !important;  transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
+</style>
+
+<main class="main" style="margin: 7%;">
+  <!-- Features Section -->
+  <section id="features" class="features section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>About Us</h2>
+      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    </div>
+
+    <div class="container">
+      {% for item in about_items %}
+      <div class="row gy-4 align-items-stretch justify-content-between features-item">
+        {% if forloop.counter|divisibleby:2 %}
+          <!-- Image Left, Content Right -->
+          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.title }}">
+            {% endif %}
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+            <h3>{{ item.title }}</h3>
+            {{ item.description|safe }}
+
+            {% if item.list_items %}
+            <ul>
+              {% for li in item.list_items %}
+                <li><i class="bi bi-check"></i> <span>{{ li }}</span></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if item.button_text %}
+            <a href="{{ item.button_link }}" class="btn btn-get-started align-self-start">{{ item.button_text }}</a>
+            {% endif %}
+          </div>
+
+        {% else %}
+          <!-- Content Left, Image Right -->
+          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+            <h3>{{ item.title }}</h3>
+            {{ item.description|safe }}
+
+            {% if item.list_items %}
+            <ul>
+              {% for li in item.list_items %}
+                <li><i class="bi bi-check"></i> <span>{{ li }}</span></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if item.button_text %}
+            <a href="{{ item.button_link }}" class="btn btn-get-started align-self-start">{{ item.button_text }}</a>
+            {% endif %}
+          </div>
+          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.title }}">
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+{% endblock %}
