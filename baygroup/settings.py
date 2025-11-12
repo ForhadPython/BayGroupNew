@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*^^9er-9b!l7&wk#*_)s=18(z5xwlg=e3$oz^r84*0t-r9f-$8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['103.123.8.58']
 
 
 # Application definition
@@ -77,13 +77,24 @@ WSGI_APPLICATION = 'baygroup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'baygroup_db',       # Your database name
+        'USER': 'baygroup',          # Your database user
+        'PASSWORD': 'baygroup',      # Your database password
+        'HOST': 'localhost',         # Usually localhost
+        'PORT': '5432',              # Default PostgreSQL port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -123,6 +134,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",   # your 'static' folder path
 ]
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
