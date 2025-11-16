@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*^^9er-9b!l7&wk#*_)s=18(z5xwlg=e3$oz^r84*0t-r9f-$8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['103.123.8.58']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
+    'django_ckeditor_5',
     'bay',
 ]
 
@@ -71,20 +71,21 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'baygroup.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': BASE_DIR / 'db.sqlite3',
 #    }
-#}
+# }
 
-
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -219,12 +220,34 @@ CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': [
             'heading', '|',
-            'bold', 'italic', 'underline', 'link', '|',
-            'bulletedList', 'numberedList', 'blockQuote', '|',
-            'insertTable', 'imageUpload', 'mediaEmbed', '|',
-            'undo', 'redo'
+            'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', '|',
+            'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+            'link', 'blockQuote', 'code', 'codeBlock', 'insertTable', 'imageUpload', 'mediaEmbed', 'horizontalLine', '|',
+            'bulletedList', 'numberedList', 'todoList', '|',
+            'alignment', '|',
+            'indent', 'outdent', '|',
+            'undo', 'redo', '|',
+            'removeFormat'
         ],
-        'height': 300,
+        'height': 400,
         'width': '100%',
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:full', 'imageStyle:side'
+            ]
+        },
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
+            ]
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
+            ]
+        },
     },
 }

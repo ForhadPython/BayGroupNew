@@ -86,8 +86,7 @@
 
 {% endblock %}
 
-
-  <footer id="footer" class="footer position-relative light-background"
+<footer id="footer" class="footer position-relative light-background"
     style="padding: 15px 0 15px 0 !important; font-family: 'Poppins', sans-serif; border-top: 1px solid #e0e0e0;">
 
     <div class="container footer-top">
@@ -98,12 +97,14 @@
         <div class="col-lg-3 col-md-6 col-sm-6 footer-about d-flex flex-column justify-content-between"
              style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
           <div>
-            <a href="index.html" class="logo d-flex align-items-center mb-3">
-              <img src="{% static 'assets/img/logo.png' %}" alt="Append Logo" style="height: 55px;">
+            {% if footer_about %}
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center mb-3">
+              <img src="{{ footer_about.logo.url }}" alt="Footer Logo" style="height: 55px;">
             </a>
             <p style="font-size: 15px; line-height: 1.8; color: #555;">
-              We are dedicated to providing excellence and reliability across every project. Our mission is to build trust, value, and long-term partnerships through quality and innovation.
+              {{ footer_about.description }}
             </p>
+            {% endif %}
           </div>
         </div>
 
@@ -113,12 +114,9 @@
           <div>
             <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Useful Links</h4>
             <ul style="list-style: none; padding: 0; line-height: 2;">
-              <li><a href="index.html" style="text-decoration: none; color: #555;">Home</a></li>
-              <li><a href="about.html" style="text-decoration: none; color: #555;">About Us</a></li>
-              <li><a href="key_management.html" style="text-decoration: none; color: #555;">Key Management</a></li>
-              <li><a href="csr.html" style="text-decoration: none; color: #555;">CSR</a></li>
-              <li><a href="aen.html" style="text-decoration: none; color: #555;">Achievements & Events</a></li>
-              <li><a href="career.html" style="text-decoration: none; color: #555;">Career</a></li>
+              {% for link in useful_links %}
+                <li><a href="{{ link.url }}" style="text-decoration: none; color: #555;">{{ link.title }}</a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -128,11 +126,11 @@
              style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
           <div>
             <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Contact Us</h4>
-            <p style="color: #555; margin: 0;">A108 Adam Street</p>
-            <p style="color: #555; margin: 0;">New York, NY 535022</p>
-            <p style="color: #555; margin: 0;">United States</p>
-            <p class="mt-4" style="color: #555;"><span>Phone: </span><span>    +1 5589 55488 55</span></p>
-            <p style="color: #555;">Email: <span> info@example.com</span></p>
+            {% if contact_info %}
+              <p style="color: #555; margin: 0;">{{ contact_info.address }}</p>
+              <p class="mt-4" style="color: #555;"><span>Phone: </span>{{ contact_info.phone }}</p>
+              <p style="color: #555;">Email: <span>{{ contact_info.email }}</span></p>
+            {% endif %}
           </div>
         </div>
 
@@ -143,15 +141,16 @@
             <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Social Media</h4>
             <p style="color: #555; font-size: 15px; line-height: 1.8;">Stay connected with us through our social media channels.</p>
             <div class="social-links d-flex gap-3 mt-3">
-              <a href="#" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-facebook"></i></a>
-              <a href="#" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-instagram"></i></a>
-              <a href="#" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-linkedin"></i></a>
+              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-facebook"></i></a>
+              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-instagram"></i></a>
+              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-  </footer>
+</footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
