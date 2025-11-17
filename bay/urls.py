@@ -11,3 +11,4 @@ urlpatterns = [
     path('career/<int:pk>/', views.career_detail_view, name='career_detail'),
     path('contact/', views.contact_view, name='contact'),
 ]
+

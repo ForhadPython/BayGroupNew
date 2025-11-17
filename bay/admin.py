@@ -1,11 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import (
-    HomeBanner, HomeAboutSection, History, OurPartner, JoinUs,
-    CsrHome, GroupBrandLogo, Csr, Aen, AboutItem,
-    KeyManagement, CareerOpportunity, ContactMessage, FooterAbout, UsefulLink, ContactInfo, SocialMedia
-)
-
+from .models import *
 # ------------------------------
 # Image Preview Helper
 # ------------------------------
@@ -38,8 +33,7 @@ admin.site.register(HomeBanner, HomeBannerAdmin)
 # ------------------------------
 @admin.register(HomeAboutSection)
 class HomeAboutSectionAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active", image_preview)
-    search_fields = ("title",)
+    list_display = ( "is_active", image_preview)
     readonly_fields = (image_preview,)
 
 
@@ -92,9 +86,16 @@ class CsrHomeAdmin(admin.ModelAdmin):
 # ------------------------------
 @admin.register(GroupBrandLogo)
 class GroupBrandLogoAdmin(admin.ModelAdmin):
-    list_display = ("title", "order", "is_active", image_preview)
-    ordering = ("order",)
-    search_fields = ("title",)
+    list_display = ('id', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('id',)
+    ordering = ('order',)
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="100" />', obj.image.url)
+        return "-"
+    image_preview.short_description = 'Logo Preview'
 
 
 # ------------------------------
@@ -154,31 +155,49 @@ class CareerOpportunityAdmin(admin.ModelAdmin):
 # ------------------------------
 # Contact Message Admin
 # ------------------------------
-@admin.register(ContactMessage)
-class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "subject", "created_at", "is_read")
-    list_filter = ("is_read",)
-    search_fields = ("name", "email", "subject", "message")
-    readonly_fields = ("created_at",)
-
-
+# ===== Footer About =====
 @admin.register(FooterAbout)
 class FooterAboutAdmin(admin.ModelAdmin):
-    list_display = ('description', 'logo')
-    # Optional: allow searching by description
-    search_fields = ('description',)
+    list_display = ('id', 'logo_preview', 'description')
 
-@admin.register(UsefulLink)
-class UsefulLinkAdmin(admin.ModelAdmin):
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html('<img src="{}" width="100" />', obj.logo.url)
+        return "-"
+    logo_preview.short_description = 'Logo Preview'
+
+# ===== Footer Useful Links =====
+@admin.register(FooterUsefulLink)
+class FooterUsefulLinkAdmin(admin.ModelAdmin):
     list_display = ('title', 'url')
     search_fields = ('title', 'url')
 
-@admin.register(ContactInfo)
-class ContactInfoAdmin(admin.ModelAdmin):
+# ===== Footer Contact Info =====
+@admin.register(FooterContactInfo)
+class FooterContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email')
     search_fields = ('address', 'phone', 'email')
 
-@admin.register(SocialMedia)
-class SocialMediaAdmin(admin.ModelAdmin):
-    list_display = ('link_1','link_2','link_3')
-    search_fields = ('link_1', 'link_2', 'link_3')
+# ===== Footer Social Media =====
+@admin.register(FooterSocialMedia)
+class FooterSocialMediaAdmin(admin.ModelAdmin):
+    list_display = ('link_1', 'link_2')
+    search_fields = ('link_1', 'link_2')
+
+
+# ------------------------------
+# Start For all Headline
+# ------------------------------
+
+
+@admin.register(HistoryHeadline)
+class HistoryHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active')
+    list_editable = ('is_active',)
+    search_fields = ('title', 'description')
+
+@admin.register(OurPartnerHeadline)
+class OurPartnerHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active')
+    list_editable = ('is_active',)
+    search_fields = ('title', 'description')

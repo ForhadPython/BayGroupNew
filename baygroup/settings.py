@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'baygroup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'baygroup_db',       # Your database name
-        'USER': 'baygroup',          # Your database user
-        'PASSWORD': 'baygroup',      # Your database password
+        'NAME': 'Bay-Group-DB',       # Your database name
+        'USER': 'postgres',          # Your database user
+        'PASSWORD': 'postgres',      # Your database password
         'HOST': 'localhost',         # Usually localhost
         'PORT': '5432',              # Default PostgreSQL port
     }

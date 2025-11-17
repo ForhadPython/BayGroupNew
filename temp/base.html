@@ -139,14 +139,23 @@
              style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
           <div>
             <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Social Media</h4>
-            <p style="color: #555; font-size: 15px; line-height: 1.8;">Stay connected with us through our social media channels.</p>
-            <div class="social-links d-flex gap-3 mt-3">
-              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-facebook"></i></a>
-              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-instagram"></i></a>
-              <a href="/" style="font-size: 20px; color: #555; transition: 0.3s;"><i class="bi bi-linkedin"></i></a>
-            </div>
+
+            {% if social_media %}
+              <p style="color: #555; font-size: 15px; line-height: 1.8;">{{ social_media.description }}</p>
+              <div class="social-links d-flex gap-3 mt-3">
+                <a href="{{ social_media.link_1 }}" style="font-size: 20px; color: #555; transition: 0.3s;">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="{{ social_media.link_2 }}" style="font-size: 20px; color: #555; transition: 0.3s;">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+              </div>
+            {% endif %}
           </div>
         </div>
+
+
+
 
       </div>
     </div>

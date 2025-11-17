@@ -54,7 +54,7 @@
   <section id="features" class="features section">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-      <h2>{{ about_section.title }}</h2>
+      <h2>{{ about_section.top_title }}</h2>
       {% if about_section.subtitle %}
         <p>{{ about_section.subtitle|safe }}</p>
       {% endif %}
@@ -96,8 +96,8 @@
   <div style="max-width:1200px; margin:0 auto;">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-      <h2>History</h2>
-      <p>Our Journey Through the Years</p>
+    <h2>{{ history_headlines.title }}</h2>
+    <p>{{ history_headlines.description }}</p>
     </div>
     <!-- End Section Title -->
 
@@ -119,7 +119,7 @@
               box-shadow:0 4px 15px rgba(0,0,0,0.1); border-right:5px solid #003366;">
               <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
               <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
-              <p style="color:#333; line-height:1.8;">{{ item.description }}</p>
+              <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
             </div>
           </div>
         {% else %}
@@ -134,7 +134,7 @@
               box-shadow:0 4px 15px rgba(0,0,0,0.1); border-left:5px solid #003366;">
               <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
               <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
-              <p style="color:#333; line-height:1.8;">{{ item.description }}</p>
+              <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
             </div>
           </div>
         {% endif %}
@@ -148,8 +148,8 @@
   <!-- ======= Our partners section Section ======= -->
   <section id="services" class="services section">
     <div class="container section-title" data-aos="fade-up">
-      <h2>Our Partners</h2>
-      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    <h2>{{ partners_headline.title }}</h2>
+    <p>{{ partners_headline.description }}</p>
     </div>
 
     <div class="container">
@@ -162,7 +162,7 @@
             </div>
             <div>
               <h4 class="title"><a href="{{ partner.link }}" class="stretched-link">{{ partner.title }}</a></h4>
-              <p class="description">{{ partner.description }}</p>
+              <p class="description">{{ partner.description|safe }}</p>
               <a href="{{ partner.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -224,7 +224,7 @@
 
 
 <!-- ======= Brand Logo Slider Section ======= -->
-<section id="brand-logos" style="background:#f8f9fa;padding:60px 0;">
+<section id="brand-logos" style="background:#f8f9fa;padding:0px 0;">
   <div class="container" data-aos="fade-up" style="text-align:center;">
     <!-- Swiper Container -->
     <div class="swiper mySwiper" style="width:100%;padding-bottom:30px;">

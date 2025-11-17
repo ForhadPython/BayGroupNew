@@ -16,12 +16,20 @@ class HomeBanner(models.Model):
         return self.title
 
 class HomeAboutSection(models.Model):
-    title = models.CharField(max_length=255)
+    top_title = models.CharField(max_length=255, help_text="Main title of the slide")
     subtitle = CKEditor5Field(config_name='default', blank=True, null=True)
     description = CKEditor5Field('Description')
     image = models.ImageField(upload_to='About/', blank=True, null=True)
     button_text = models.CharField(max_length=100, default='Learn More')
     button_link = models.URLField(max_length=300, default='#')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.top_title
+
+class HistoryHeadline(models.Model):
+    title = models.CharField(max_length=255, default="History")
+    description = models.TextField(default="Our Journey Through the Years")
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -39,6 +47,15 @@ class History(models.Model):
 
     class Meta:
         ordering = ['order']
+
+
+class OurPartnerHeadline(models.Model):
+    title = models.CharField(max_length=255, default="History")
+    description = models.TextField(default="Our Journey Through the Years")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 
 class OurPartner(models.Model):
@@ -89,17 +106,12 @@ class CsrHome(models.Model):
 
 
 class GroupBrandLogo(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='brand_logos/')
-    link = models.URLField(default="#", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
-    class Meta:
-        ordering = ['order']
-
     def __str__(self):
-        return self.title or f"Brand Logo {self.id}"
+        return f"Logo {self.id} - Order {self.order}"
 
 
 class Csr(models.Model):
@@ -238,7 +250,7 @@ class FooterAbout(models.Model):
         return "Footer About Section"
 
 
-class UsefulLink(models.Model):
+class FooterUsefulLink(models.Model):
     title = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
 
@@ -246,7 +258,7 @@ class UsefulLink(models.Model):
         return self.title
 
 
-class ContactInfo(models.Model):
+class FooterContactInfo(models.Model):
     address = models.TextField()
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=255)
@@ -255,10 +267,10 @@ class ContactInfo(models.Model):
         return "Footer Contact Information"
 
 
-class SocialMedia(models.Model):
+class FooterSocialMedia(models.Model):
+    description = models.TextField()
     link_1 = models.CharField(max_length=255)
     link_2 = models.CharField(max_length=255)
-    link_3 = models.CharField(max_length=255)
 
     def __str__(self):
         return self.link_1
