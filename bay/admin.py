@@ -213,3 +213,15 @@ class KeyManagementHeadlineAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('title', 'description')
+
+@admin.register(BusinessPageName)
+class BusinessPageNameAdmin(admin.ModelAdmin):
+    list_display = ('id', 'page_name')
+    search_fields = ('page_name',)
+
+
+@admin.register(BusinessPageDetail)
+class BusinessPageDetailAdmin(admin.ModelAdmin):
+    list_display = ('id', 'page_title', 'title', 'business_p')
+    search_fields = ('page_title', 'title')
+    list_filter = ('business_p',)

@@ -297,3 +297,25 @@ class FooterSocialMedia(models.Model):
         return self.link_1
 
 # @@@@@ End Footer Model @@@@@@@@@@
+
+
+# @@@@@ Sister Concern @@@@@@@@@@
+class BusinessPageName(models.Model):
+    page_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.page_name
+
+
+class BusinessPageDetail(models.Model):
+    page_title = models.CharField(max_length=200)
+    image_1 = models.ImageField(upload_to="business/", null=True, blank=True)
+    image_2 = models.ImageField(upload_to="business/", null=True, blank=True)
+    title = models.CharField(max_length=200)
+    body = CKEditor5Field()
+    business_p = models.ForeignKey(BusinessPageName, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+# @@@@@ Sister Concern @@@@@@@@@@

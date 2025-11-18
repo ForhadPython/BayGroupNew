@@ -54,16 +54,9 @@
           <li><a href="/key_management/">Key Management</a></li>
           <li class="dropdown"><a href="#"><span>Our Partners</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Bay Tanneries Unit‑2 Ltd</a></li>
-              <li><a href="#">Bay Footwear Ltd</a></li>
-              <li><a href="#">Try On Shoe Materials</a></li>
-              <li><a href="#">Bay Emporium Ltd</a></li>
-              <li><a href="#">Bay Economic Zone Ltd</a></li>
-              <li><a href="#">Formosa Logistics Ltd</a></li>
-              <li><a href="#">Paruma Construction Ltd</a></li>
-              <li><a href="#">Good House Properties Ltd</a></li>
-              <li><a href="#">Good Bags Accessories Ltd</a></li>
-              <li><a href="#">ANZ Bags Accessories Ltd</a></li>
+              {% for pages in business_page_view %}
+              <li><a href="{% url 'business_page' pages.page_name %}">{{ pages.page_name }}</a></li>
+              {% endfor %}
             </ul>
           </li>
           <li><a href="/csr_section/">Csr</a></li>

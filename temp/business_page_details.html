@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+{background: #fff !important;  transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
+.main {
+    background: #f9f9f9;
+    padding-bottom: 60px;
+}
+.page-title {
+    margin: 7% 0 5% 0;
+    text-align: center;
+}
+.page-title .section-title h2 {
+    font-weight: 700;
+    color: #222;
+}
+.page-title .section-title p {
+    color: #555;
+}
+.portfolio-details-slider img {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    object-fit: cover;
+}
+.portfolio-description h2 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1c1c1c;
+}
+.portfolio-description p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+</style>
+
+<main class="main" style="margin: 10%;">
+
+    <!-- Dynamic Page Title -->
+    <div class="page-title" data-aos="fade-up">
+        <div class="container section-title">
+            <h2>{{ business_data.page_title }}</h2>
+            <p>{{ business_data.title }}</p>
+        </div>
+    </div>
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+        <div class="container" data-aos="fade-up">
+
+            {% if business_data.image_1 or business_data.image_2 %}
+                <div class="portfolio-details-slider swiper init-swiper">
+
+                    <script type="application/json" class="swiper-config">
+                    {
+                      "loop": true,
+                      "speed": 600,
+                      "autoplay": { "delay": 5000 },
+                      "slidesPerView": "auto",
+                      "pagination": {
+                        "el": ".swiper-pagination",
+                        "type": "bullets",
+                        "clickable": true
+                      }
+                    }
+                    </script>
+
+                    <div class="swiper-wrapper align-items-center">
+
+                        {% if business_data.image_1 %}
+                        <div class="swiper-slide">
+                            <img src="{{ business_data.image_1.url }}" alt="">
+                        </div>
+                        {% endif %}
+
+                        {% if business_data.image_2 %}
+                        <div class="swiper-slide">
+                            <img src="{{ business_data.image_2.url }}" alt="">
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+                {% endif %}
+
+
+            <!-- Dynamic Body Content -->
+            <div class="row align-items-center mt-4">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="portfolio-description">
+                        <h2>{{ business_data.title }}</h2>
+                        <div>
+                            {{ business_data.body|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}
