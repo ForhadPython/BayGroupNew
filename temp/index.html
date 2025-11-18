@@ -91,58 +91,92 @@
   <!-- /About Us End -->
 
 
-<!-- ======= Bay Group History Section ======= -->
-<section style="background:#f8f9fa; padding:60px 0;">
-  <div style="max-width:1200px; margin:0 auto;">
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-    <h2>{{ history_headlines.title }}</h2>
-    <p>{{ history_headlines.description }}</p>
+  <!-- ======= Bay Group History Section ======= -->
+  <section style="background:#f8f9fa; padding:60px 0; font-family:inherit;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>{{ history_headlines.title }}</h2>
+        <p>{{ history_headlines.description }}</p>
+      </div>
+      <!-- End Section Title -->
+      <!-- Timeline Container -->
+      <div style="position:relative; margin:50px 0;">
+        <!-- Center Line (Hidden on mobile) -->
+        <div style="
+          content:''; position:absolute; width:4px; background:#003366;
+          top:0; bottom:0; left:50%; margin-left:-2px;
+        " class="timeline-line"></div>
+        {% for item in histories %}
+          {% if forloop.counter|divisibleby:2 %}
+            <!-- Right item -->
+            <div style="
+              position:relative; width:50%; padding:20px 60px; left:50%;
+            " class="timeline-item right-item">
+              <!-- Left Arrow -->
+              <div style="
+                position:absolute; top:40px; left:-25px; width:40px; height:40px;
+                background:url('{% static 'assets/img/right_arrow2.jpeg' %}') no-repeat center center;
+                background-size:contain; z-index:10; transform:translateY(-50%);
+              "></div>
+              <div style="
+                background:#fff; padding:25px; border-radius:12px;
+                box-shadow:0 4px 15px rgba(0,0,0,0.1);
+                border-right:5px solid #003366;
+              ">
+                <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
+                <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
+                <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
+              </div>
+            </div>
+          {% else %}
+            <!-- Left item -->
+            <div style="
+              position:relative; width:50%; padding:20px 60px; left:0;
+            " class="timeline-item left-item">
+              <!-- Right Arrow -->
+              <div style="
+                position:absolute; top:40px; right:-25px; width:40px; height:40px;
+                background:url('{% static 'assets/img/arrow_left.jpeg' %}') no-repeat center center;
+                background-size:contain; z-index:10; transform:translateY(-50%);
+              "></div>
+              <div style="
+                background:#fff; padding:25px; border-radius:12px;
+                box-shadow:0 4px 15px rgba(0,0,0,0.1);
+                border-left:5px solid #003366;
+              ">
+                <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
+                <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
+                <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
-    <!-- End Section Title -->
+  </section>
+  <!-- ======= End Bay Group History Section ======= -->
+  <!-- Mobile Responsive Inline CSS -->
+  <style>
+    @media (max-width: 768px) {
+      .timeline-line {
+        display: none !important;
+      }
+      .timeline-item {
+        width: 100% !important;
+        left: 0 !important;
+        padding: 10px 20px !important;
+        margin-bottom: 30px;
+      }
+      .timeline-item div {
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
+      }
+      .timeline-item .arrow {
+        display: none !important;
+      }
+    }
+  </style>
 
-    <!-- Timeline container -->
-    <div style="position:relative; margin:50px 0;">
-      <!-- Center line -->
-      <div style="content:''; position:absolute; width:4px; background:#003366; top:0; bottom:0; left:50%; margin-left:-2px;"></div>
-
-      {% for item in histories %}
-        {% if forloop.counter|divisibleby:2 %}
-          <!-- Right side item -->
-          <div style="position:relative; width:50%; padding:20px 60px; left:50%;">
-            <!-- Left-pointing arrow -->
-            <div style="position:absolute; top:40px; left:-25px; width:40px; height:40px;
-              background:url('{% static 'assets/img/right_arrow2.jpeg' %}') no-repeat center center;
-              background-size:contain; z-index:10; transform:translateY(-50%);">
-            </div>
-            <div style="background:#fff; padding:25px; border-radius:12px;
-              box-shadow:0 4px 15px rgba(0,0,0,0.1); border-right:5px solid #003366;">
-              <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
-              <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
-              <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
-            </div>
-          </div>
-        {% else %}
-          <!-- Left side item -->
-          <div style="position:relative; width:50%; padding:20px 60px; left:0;">
-            <!-- Right-pointing arrow -->
-            <div style="position:absolute; top:40px; right:-25px; width:40px; height:40px;
-              background:url('{% static 'assets/img/arrow_left.jpeg' %}') no-repeat center center;
-              background-size:contain; z-index:10; transform:translateY(-50%);">
-            </div>
-            <div style="background:#fff; padding:25px; border-radius:12px;
-              box-shadow:0 4px 15px rgba(0,0,0,0.1); border-left:5px solid #003366;">
-              <h4 style="color:#003366; font-weight:700;">{{ item.year }}</h4>
-              <h5 style="margin-bottom:10px;">{{ item.title }}</h5>
-              <p style="color:#333; line-height:1.8;">{{ item.description|safe }}</p>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-<!-- ======= End Bay Group History Section ======= -->
 
 
   <!-- ======= Our partners section Section ======= -->
@@ -162,7 +196,7 @@
             </div>
             <div>
               <h4 class="title"><a href="{{ partner.link }}" class="stretched-link">{{ partner.title }}</a></h4>
-              <p class="description">{{ partner.description|safe }}</p>
+              <p class="description">{{ partner.description|safe|truncatewords:30 }}</p>
               <a href="{{ partner.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
