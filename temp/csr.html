@@ -27,7 +27,7 @@
         <div class="col-md-6" style="padding:30px;">
           <h4 style="color:#000000; font-weight:700; margin-bottom:15px;">{{ item.title }}</h4>
           <p style="color:#555; font-size:15px; line-height:1.8;">
-            {{ item.description|linebreaks }}
+            {{ item.description|safe|linebreaks }}
           </p>
           {% if item.button_link %}
           <a href="{{ item.button_link }}" target="_blank" class="btn btn-primary mt-3"
@@ -48,13 +48,12 @@
         <div class="col-md-6" style="padding:30px;">
           <h4 style="color:#000000; font-weight:700; margin-bottom:15px;">{{ item.title }}</h4>
           <p style="color:#555; font-size:15px; line-height:1.8;">
-            {{ item.description|linebreaks }}
+            {{ item.description|safe|linebreaks }}
           </p>
           {% if item.button_link %}
-          <a href="{{ item.button_link }}" target="_blank" class="btn btn-primary mt-3"
-            style="border-radius:25px; padding:10px 25px; font-size:14px; font-weight:600; background-color:#e84545">
-            See More
-          </a>
+<!--          <a href="{{ item.button_link }}" target="_blank" class="btn btn-primary mt-3"-->
+<!--            style="border-radius:25px; font-size:14px; font-weight:600; background-color:#e84545">-->
+<!--          </a>-->
           {% endif %}
         </div>
         {% endif %}
