@@ -144,6 +144,14 @@ class Aen(models.Model):
 
 # @@@@@ About Us Model @@@@@@@@@@
 
+class AboutItemHeadline(models.Model):
+    title = models.CharField(max_length=255, default="History")
+    description = CKEditor5Field('AboutHeadline')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
 class AboutItem(models.Model):
     title = models.CharField(max_length=200)
     description = CKEditor5Field('Description/AEN')
@@ -152,12 +160,25 @@ class AboutItem(models.Model):
     button_link = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to='about_images/', blank=True, null=True)
 
+    position = models.PositiveIntegerField(default=0)   # <-- ordering field added
+
+    class Meta:
+        ordering = ['position']   # default sorting by position
+
     def __str__(self):
         return self.title
 # @@@@@ About Us Model @@@@@@@@@@
 
 
 # @@@@@ Key management Model @@@@@@@@@@
+
+class KeyManagementHeadline(models.Model):
+    title = models.CharField(max_length=255, default="History")
+    description = CKEditor5Field('KeyManagement')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 class KeyManagement(models.Model):
     """Model to represent a key management or advisory team member."""

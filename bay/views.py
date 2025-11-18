@@ -53,30 +53,29 @@ def home_view(request):
 # ===================== ABOUT US PAGE =====================
 def about_view(request):
     about_items = AboutItem.objects.all()
-    # Footer section (using new models)
-    # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
 
+    about_headline = AboutItemHeadline.objects.first()
+
 
     return render(request, 'about.html', {'about_items': about_items,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media})
+                                          'contact_info':contact_info,'social_media':social_media,'about_headline':about_headline})
 
 
 # ===================== KEY MANAGEMENT PAGE =====================
 def key_management_view(request):
     team_members = KeyManagement.objects.filter(is_active=True).order_by('order')
-    # Footer section (using new models)
-    # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
+    key_management_headline= KeyManagementHeadline.objects.first()
 
     return render(request, 'key_management.html', {'team_members': team_members,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media})
+                                          'contact_info':contact_info,'social_media':social_media,'key_management_headline':key_management_headline})
 
 # ===================== CSR PAGE =====================
 def csr_view(request):

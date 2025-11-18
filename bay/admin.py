@@ -201,3 +201,15 @@ class OurPartnerHeadlineAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active')
     list_editable = ('is_active',)
     search_fields = ('title', 'description')
+
+@admin.register(AboutItemHeadline)
+class AboutItemHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description')
+
+@admin.register(KeyManagementHeadline)
+class KeyManagementHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description')
