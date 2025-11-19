@@ -244,3 +244,24 @@ class AenHeadlineHomeAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('title', 'description')
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at', 'is_read')
+    list_filter = ('is_read', 'created_at')
+    search_fields = ('name', 'email', 'subject', 'message')
+    readonly_fields = ('created_at',)
+    ordering = ('-created_at',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'email', 'subject', 'message')
+        }),
+        ('Contact Info', {
+            'fields': ('address', 'phone1', 'phone2')
+        }),
+        ('Status', {
+            'fields': ('is_read', 'created_at')
+        }),
+    )
