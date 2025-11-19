@@ -86,7 +86,7 @@ def key_management_view(request):
 
 # ===================== CSR PAGE =====================
 def csr_view(request):
-    csr_items = Csr.objects.filter(is_active=True)
+    csr_items = Csr.objects.filter(is_active=True).order_by('sequence')
     # Footer section (using new models)
     # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
@@ -170,10 +170,10 @@ def career_detail_view(request, pk):
 def contact_view(request):
     success = False
 
-    # Load footer + business menu for ALL requests (GET + POST)
+    # Footer and business menu
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
-    footer_contact_info = FooterContactInfo.objects.first()  # renamed to avoid conflict
+    contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
     business_page_view = BusinessPageName.objects.all()
 
@@ -182,18 +182,16 @@ def contact_view(request):
         email = request.POST.get("email")
         subject = request.POST.get("subject")
         message = request.POST.get("message")
-        phone1 = request.POST.get("phone1", "")
-        phone2 = request.POST.get("phone2", "")
-        address = request.POST.get("address", "")
 
+        # Save to database
         ContactMessage.objects.create(
             name=name,
             email=email,
             subject=subject,
             message=message,
-            phone1=phone1,
-            phone2=phone2,
-            address=address,
+            phone1="",
+            phone2="",
+            address="",
             created_at=timezone.now(),
         )
         success = True
@@ -201,7 +199,7 @@ def contact_view(request):
     context = {
         "footer_about": footer_about,
         "useful_links": useful_links,
-        "contact_info": footer_contact_info,   # correct contact info
+        "contact_info": contact_info,
         "social_media": social_media,
         "business_page_view": business_page_view,
         "success": success,

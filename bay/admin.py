@@ -103,10 +103,11 @@ class GroupBrandLogoAdmin(admin.ModelAdmin):
 # ------------------------------
 @admin.register(Csr)
 class CsrAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active", image_preview)
+    list_display = ("title", "is_active", "sequence", image_preview)
     list_filter = ("is_active",)
     search_fields = ("title",)
     readonly_fields = (image_preview,)
+    ordering = ('sequence',)  # admin list default ordering
 
 
 # ------------------------------

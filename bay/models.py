@@ -128,10 +128,13 @@ class Csr(models.Model):
     description = CKEditor5Field(blank=True, null=True, help_text="Second paragraph text (optional)")
     button_link = models.URLField(max_length=300, default="", help_text="Link for the Learn More button")
     is_active = models.BooleanField(default=True, help_text="Show or hide this About section")
+    sequence = models.PositiveIntegerField(default=0, help_text="Order of display")
+
+    class Meta:
+        ordering = ['sequence']  # default ordering by sequence
 
     def __str__(self):
         return self.title
-
 
 class AenHeadline(models.Model):
     title = models.CharField(max_length=255, default="Aen")

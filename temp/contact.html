@@ -1,106 +1,113 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <style>
-{background: #fff !important;  transition: none !important;}
+{background: #fff !important; transition: none !important;}
 #header .navmenu ul li a {color: #000 !important;}
 </style>
 
 <main class="main" style="margin: 5%;">
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+  <!-- Contact Section -->
+  <section id="contact" class="contact section">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Contact</h2>
+      <p>Feel free to reach out for any inquiries or support.</p>
+    </div>
 
-        <div class="row gy-4">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-          <div class="col-lg-6">
+      <div class="row gy-4">
 
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="200">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>A108 Adam Street</p>
-                  <p>New York, NY 535022</p>
-                </div>
-              </div><!-- End Info Item -->
+        <!-- LEFT SIDE CONTACT INFO -->
+        <div class="col-lg-6">
+          <div class="row gy-4">
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
-                  <p>+1 6678 254445 41</p>
-                </div>
-              </div><!-- End Info Item -->
+            <!-- Address -->
+            <div class="col-md-6">
+              <div class="info-item" data-aos="fade" data-aos-delay="200">
+                <i class="bi bi-geo-alt"></i>
+                <h3>Address</h3>
+                <p>{{ contact_info.address_line1 }}</p>
+                <p>{{ contact_info.address_line2 }}</p>
+              </div>
+            </div>
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@example.com</p>
-                  <p>contact@example.com</p>
-                </div>
-              </div><!-- End Info Item -->
+            <!-- Phone -->
+            <div class="col-md-6">
+              <div class="info-item" data-aos="fade" data-aos-delay="300">
+                <i class="bi bi-telephone"></i>
+                <h3>Call Us</h3>
+                <p>{{ contact_info.phone_1 }}</p>
+                <p>{{ contact_info.phone_2 }}</p>
+              </div>
+            </div>
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-<!--                  <i class="bi bi-envelope"></i>-->
-                  <h3></h3>
-                  <p></p>
-                  <p></p>
-                </div>
-              </div><!-- End Info Item -->
-
+            <!-- Email -->
+            <div class="col-md-6">
+              <div class="info-item" data-aos="fade" data-aos-delay="400">
+                <i class="bi bi-envelope"></i>
+                <h3>Email Us</h3>
+                <p>{{ contact_info.email_1 }}</p>
+                <p>{{ contact_info.email_2 }}</p>
+              </div>
             </div>
 
           </div>
+        </div>
 
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <!-- RIGHT SIDE FORM -->
+        <div class="col-lg-6">
+
+          {% if success %}
+            <div class="alert alert-success text-center">
+              Your message has been sent successfully!
+            </div>
+          {% endif %}
+
+           <form method="post" action="{% url 'contact' %}" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              {% csrf_token %}
               <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
+                  <div class="col-md-6">
+                      <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                  </div>
 
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
+                  <div class="col-md-6">
+                      <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                  </div>
 
-                <div class="col-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
+                  <div class="col-12">
+                      <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                  </div>
 
-                <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
+                  <div class="col-12">
+                      <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  </div>
 
-                <div class="col-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
+                  <div class="col-12 text-center">
+                      {% if success %}
+                          <div class="sent-message">Your message has been sent successfully!</div>
+                      {% endif %}
+                      <button type="submit">Send Message</button>
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                  </div>
 
               </div>
-            </form>
-          </div><!-- End Contact Form -->
+          </form>
 
-        </div>
+        </div><!-- End Contact Form -->
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </div>
 
-  </main>
+  </section>
+
+</main>
 
 {% endblock %}
