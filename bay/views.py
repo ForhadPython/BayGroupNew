@@ -17,13 +17,15 @@ def home_view(request):
     history_headlines = HistoryHeadline.objects.filter(is_active=True).first()  # NEW
     histories = History.objects.filter(is_active=True).order_by('-year')
     partners_headline = OurPartnerHeadline.objects.filter(is_active=True).first()  # NEW
-    partners = OurPartner.objects.filter(is_active=True).order_by('order')
+    partners = OurPartner.objects.filter(is_active=True).order_by('order')[:8]
     join_us_section = JoinUs.objects.filter(is_active=True).first()
     csr_section = CsrHome.objects.filter(is_active=True).first()
     brand_logos = GroupBrandLogo.objects.filter(is_active=True).order_by('order')
     aen_posts = Aen.objects.filter(is_active=True).order_by('order')
 
     business_page_view = BusinessPageName.objects.all()
+
+    aen_headline_home = AenHeadlineHome.objects.filter(is_active=True).first()  # NEW
 
     # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
@@ -47,6 +49,7 @@ def home_view(request):
         'contact_info': contact_info,
         'social_media': social_media,
         'business_page_view': business_page_view,
+        'aen_headline_home': aen_headline_home,
     }
 
     return render(request, 'index.html', context)

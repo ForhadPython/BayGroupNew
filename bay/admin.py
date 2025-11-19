@@ -238,3 +238,9 @@ class AenHeadlineAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'is_active')
     list_filter = ('is_active',)
     search_fields = ('title', 'description')
+
+@admin.register(AenHeadlineHome)
+class AenHeadlineHomeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description')

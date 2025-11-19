@@ -136,6 +136,15 @@ class Csr(models.Model):
     def __str__(self):
         return self.title
 
+class AenHeadlineHome(models.Model):
+    title = models.CharField(max_length=255, default="Aen")
+    description = models.TextField(default="Our Journey Through the Years")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+
 class AenHeadline(models.Model):
     title = models.CharField(max_length=255, default="Aen")
     description = models.TextField(default="Our Journey Through the Years")
