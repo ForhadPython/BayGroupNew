@@ -323,8 +323,6 @@
 <section id="recent-posts" class="recent-posts section">
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
-<!--    <h2>Achievements & Events (News)</h2>-->
-<!--    <p>Our latest updates and milestones</p>-->
   <h2>{{ aen_headline_home.title }}</h2>
   <p>{{ aen_headline_home.description|safe }}</p>
   </div><!-- End Section Title -->
@@ -346,7 +344,7 @@
             </h2>
             <p>{{ post.description|safe|truncatewords:25 }}</p>
             {% if post.link %}
-              <a href="{{ post.link }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ post.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
             {% endif %}
           </article>
         </div>

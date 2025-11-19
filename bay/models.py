@@ -183,7 +183,7 @@ class AboutItemHeadline(models.Model):
 
 class AboutItem(models.Model):
     title = models.CharField(max_length=200)
-    description = CKEditor5Field('Description/AEN')
+    description = CKEditor5Field('Description/About')
     list_items = models.JSONField(blank=True, null=True)
     button_text = models.CharField(max_length=100, blank=True, null=True)
     button_link = models.URLField(blank=True, null=True)
@@ -294,7 +294,7 @@ class ContactMessage(models.Model):
 
 class FooterAbout(models.Model):
     logo = models.ImageField(upload_to="footer/", null=True, blank=True)
-    description = models.TextField()
+    description = CKEditor5Field()
 
     def __str__(self):
         return "Footer About Section"

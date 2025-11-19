@@ -15,7 +15,7 @@ def home_view(request):
     banners = HomeBanner.objects.filter(is_active=True)
     about_section = HomeAboutSection.objects.filter(is_active=True).first()
     history_headlines = HistoryHeadline.objects.filter(is_active=True).first()  # NEW
-    histories = History.objects.filter(is_active=True).order_by('-year')
+    histories = History.objects.filter(is_active=True).order_by('order')
     partners_headline = OurPartnerHeadline.objects.filter(is_active=True).first()  # NEW
     partners = OurPartner.objects.filter(is_active=True).order_by('order')[:8]
     join_us_section = JoinUs.objects.filter(is_active=True).first()
@@ -90,7 +90,8 @@ def key_management_view(request):
 # ===================== CSR PAGE =====================
 def csr_view(request):
     csr_items = Csr.objects.filter(is_active=True).order_by('sequence')
-    # Footer section (using new models)
+    csr_page_headline = CsrHeadline.objects.first()
+    # CsrHeadline
     # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
@@ -100,7 +101,7 @@ def csr_view(request):
     business_page_view = BusinessPageName.objects.all()
 
     return render(request, 'csr.html', {'csr_items': csr_items,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media, 'business_page_view':business_page_view})
+                                          'contact_info':contact_info,'social_media':social_media, 'business_page_view':business_page_view,'csr_page_headline':csr_page_headline})
 
 # ===================== AEN PAGE =====================
 def aen_view(request):

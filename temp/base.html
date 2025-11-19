@@ -93,7 +93,7 @@
               <img src="{{ footer_about.logo.url }}" alt="Footer Logo" style="height: 55px;">
             </a>
             <p style="font-size: 15px; line-height: 1.8; color: #555;">
-              {{ footer_about.description }}
+              {{ footer_about.description|safe }}
             </p>
             {% endif %}
           </div>
