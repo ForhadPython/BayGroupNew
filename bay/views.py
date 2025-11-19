@@ -101,19 +101,37 @@ def csr_view(request):
 
 # ===================== AEN PAGE =====================
 def aen_view(request):
+    # AEN Content
+    aen_headline = AenHeadline.objects.first()
     aen_items = Aen.objects.filter(is_active=True).order_by('order')
-    # Footer section (using new models)
-    # Footer section (using new models)
+
+    # Footer
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
 
+    # Business page
     business_page_view = BusinessPageName.objects.all()
 
-    context = {'aen_items': aen_items,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media,'business_page_view':business_page_view}
+    # CSR headline (if this is needed)
+    src_headline = CsrHeadline.objects.first()
+
+    context = {
+        'aen_headline': aen_headline,
+        'aen_items': aen_items,
+
+        'footer_about': footer_about,
+        'useful_links': useful_links,
+        'contact_info': contact_info,
+        'social_media': social_media,
+
+        'business_page_view': business_page_view,
+        'src_headline': src_headline,
+    }
+
     return render(request, 'aen.html', context)
+
 
 
 # ===================== CAREER PAGE =====================

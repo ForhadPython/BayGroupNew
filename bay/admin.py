@@ -225,3 +225,15 @@ class BusinessPageDetailAdmin(admin.ModelAdmin):
     list_display = ('id', 'page_title', 'title', 'business_p')
     search_fields = ('page_title', 'title')
     list_filter = ('business_p',)
+
+@admin.register(CsrHeadline)
+class CsrHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description')
+
+@admin.register(AenHeadline)
+class AenHeadlineAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'description')

@@ -114,12 +114,29 @@ class GroupBrandLogo(models.Model):
         return f"Logo {self.id} - Order {self.order}"
 
 
+class CsrHeadline(models.Model):
+    title = models.CharField(max_length=255, default="History")
+    description = models.TextField(default="Our Journey Through the Years")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
 class Csr(models.Model):
     image = models.ImageField(upload_to='csr/', help_text="Main image for the csr section")
     title = models.TextField(help_text="First paragraph text")
     description = CKEditor5Field(blank=True, null=True, help_text="Second paragraph text (optional)")
     button_link = models.URLField(max_length=300, default="", help_text="Link for the Learn More button")
     is_active = models.BooleanField(default=True, help_text="Show or hide this About section")
+
+    def __str__(self):
+        return self.title
+
+
+class AenHeadline(models.Model):
+    title = models.CharField(max_length=255, default="Aen")
+    description = models.TextField(default="Our Journey Through the Years")
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -290,8 +307,8 @@ class FooterContactInfo(models.Model):
 
 class FooterSocialMedia(models.Model):
     description = models.TextField()
-    link_1 = models.CharField(max_length=255)
-    link_2 = models.CharField(max_length=255)
+    link_1 = models.CharField(max_length=255,null=True, blank=True)
+    link_2 = models.CharField(max_length=255,null=True, blank=True)
 
     def __str__(self):
         return self.link_1

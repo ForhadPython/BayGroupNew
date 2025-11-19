@@ -3,9 +3,79 @@
 {% block content %}
 
 <style>
-{background: #fff !important;  transition: none !important;}
+{background: #fff !important; transition: none !important;}
 #header .navmenu ul li a {color: #000 !important;}
+
+/* 3-line truncate */
+.truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Beautiful Modal Design */
+.modal-content {
+    border-radius: 18px;
+    border: none;
+    padding: 10px 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    animation: popupFade 0.3s ease-out;
+}
+
+@keyframes popupFade {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* UPDATED HEADER (Close button visible + title centered) */
+.modal-header {
+    border-bottom: none;
+    width: 100%;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #000 !important;
+    opacity: 0.8;
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+
+.modal-body img {
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+/* Background blur */
+.modal-backdrop.show {
+    backdrop-filter: blur(4px);
+}
 </style>
+
 
 <main class="main" style="margin-top: 7%;">
 
@@ -14,144 +84,60 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Achievements & Events (News)</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="{% static '' %}assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-              <p>Possimus soluta ut id suscipit ea ut in quo quia et solutaPossimus soluta ut id suscipit ea ut in quo quia et 
-                solutaPossimus soluta ut id suscipit ea ut in quo quia et soluta
-              </p>
-              <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-
-            </article>
-          </div><!-- End post list item -->
-
-
-        </div><!-- End recent posts list -->
-
+        <h2>{{ aen_headline.title }}</h2>
+        <p>{{ aen_headline.description }}</p>
       </div>
 
-    </section><!-- /Recent Posts Section -->
+      <div class="container">
+        <div class="row gy-4">
 
-  </main>
+          {% for item in aen_items %}
+          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+
+              <div class="post-img">
+                <img src="{{ item.image.url }}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="title">
+                <a href="#">{{ item.title }}</a>
+              </h2>
+
+              <!-- Truncated Description -->
+              <p class="truncate-3">{{ item.description|striptags }}</p>
+
+              <!-- Read More Button -->
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#aenModal{{ item.id }}">
+                <span>Read More</span><i class="bi bi-arrow-right"></i>
+              </a>
+
+            </article>
+          </div>
+
+          <!-- Popup Modal -->
+            <!-- Popup Modal -->
+            <div class="modal fade" id="aenModal{{ item.id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ item.title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body">
+                    <img src="{{ item.image.url }}" class="img-fluid mb-3" alt="{{ item.title }}">
+                    <div>{{ item.description|safe }}</div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+</main>
 
 {% endblock %}
