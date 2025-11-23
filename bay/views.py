@@ -22,12 +22,9 @@ def home_view(request):
     csr_section = CsrHome.objects.filter(is_active=True).first()
     brand_logos = GroupBrandLogo.objects.filter(is_active=True).order_by('order')
     aen_posts = Aen.objects.filter(is_active=True).order_by('order')
-
     business_page_view = BusinessPageName.objects.all()
-
     aen_headline_home = AenHeadlineHome.objects.filter(is_active=True).first()  # NEW
-
-    # Footer section (using new models)
+    # Footer section (Jusing new models)
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
@@ -51,7 +48,6 @@ def home_view(request):
         'business_page_view': business_page_view,
         'aen_headline_home': aen_headline_home,
     }
-
     return render(request, 'index.html', context)
 
 
@@ -63,14 +59,18 @@ def about_view(request):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-
     about_headline = AboutItemHeadline.objects.first()
-
     business_page_view = BusinessPageName.objects.all()
 
-
-    return render(request, 'about.html', {'about_items': about_items,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media,'about_headline':about_headline,'business_page_view':business_page_view})
+    return render(request, 'about.html', {
+        'about_items': about_items,
+        'footer_about': footer_about,
+        'useful_links': useful_links,
+        'contact_info': contact_info,
+        'social_media': social_media,
+        'about_headline': about_headline,
+        'business_page_view': business_page_view,
+    })
 
 
 # ===================== KEY MANAGEMENT PAGE =====================
@@ -80,60 +80,64 @@ def key_management_view(request):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-    key_management_headline= KeyManagementHeadline.objects.first()
-
+    key_management_headline = KeyManagementHeadline.objects.first()
     business_page_view = BusinessPageName.objects.all()
 
-    return render(request, 'key_management.html', {'team_members': team_members,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media,'key_management_headline':key_management_headline,'business_page_view':business_page_view})
+    return render(request, 'key_management.html', {
+        'team_members': team_members,
+        'footer_about': footer_about,
+        'useful_links': useful_links,
+        'contact_info': contact_info,
+        'social_media': social_media,
+        'key_management_headline': key_management_headline,
+        'business_page_view': business_page_view,
+    })
 
 # ===================== CSR PAGE =====================
 def csr_view(request):
     csr_items = Csr.objects.filter(is_active=True).order_by('sequence')
     csr_page_headline = CsrHeadline.objects.first()
-    # CsrHeadline
-    # Footer section (using new models)
+
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-
     business_page_view = BusinessPageName.objects.all()
 
-    return render(request, 'csr.html', {'csr_items': csr_items,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media, 'business_page_view':business_page_view,'csr_page_headline':csr_page_headline})
+    return render(request, 'csr.html', {
+        'csr_items': csr_items,
+        'footer_about': footer_about,
+        'useful_links': useful_links,
+        'contact_info': contact_info,
+        'social_media': social_media,
+        'business_page_view': business_page_view,
+        'csr_page_headline': csr_page_headline,
+    })
 
 # ===================== AEN PAGE =====================
 def aen_view(request):
     # AEN Content
     aen_headline = AenHeadline.objects.first()
     aen_items = Aen.objects.filter(is_active=True).order_by('order')
-
     # Footer
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-
     # Business page
     business_page_view = BusinessPageName.objects.all()
-
     # CSR headline (if this is needed)
     src_headline = CsrHeadline.objects.first()
-
     context = {
         'aen_headline': aen_headline,
         'aen_items': aen_items,
-
         'footer_about': footer_about,
         'useful_links': useful_links,
         'contact_info': contact_info,
         'social_media': social_media,
-
         'business_page_view': business_page_view,
         'src_headline': src_headline,
     }
-
     return render(request, 'aen.html', context)
 
 
@@ -141,17 +145,20 @@ def aen_view(request):
 # ===================== CAREER PAGE =====================
 def career_view(request):
     jobs = CareerOpportunity.objects.filter(is_active=True, status='active').order_by('order')
-    # Footer section (using new models)
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-
     business_page_view = BusinessPageName.objects.all()
-
-    context = {'jobs': jobs,'footer_about':footer_about,useful_links:'useful_links',
-                                          'contact_info':contact_info,'social_media':social_media,'business_page_view':business_page_view}
-    return render(request, 'career.html', context,)
+    context = {
+        'jobs': jobs,
+        'footer_about': footer_about,
+        'useful_links': useful_links,
+        'contact_info': contact_info,
+        'social_media': social_media,
+        'business_page_view': business_page_view,
+    }
+    return render(request, 'career.html', context)
 
 
 # ===================== CAREER DETAIL PAGE =====================
@@ -162,9 +169,7 @@ def career_detail_view(request, pk):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-
     business_page_view = BusinessPageName.objects.all()
-
     context = {'job': job,'footer_about':footer_about,useful_links:'useful_links',
                                           'contact_info':contact_info,'social_media':social_media,'business_page_view':business_page_view}
     return render(request, 'career_detail.html', context)

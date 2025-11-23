@@ -33,9 +33,36 @@
 
 <body class="index-page">
 
+<style>
+.tooltip-menu {
+  position: relative;
+}
+
+.tooltip-menu::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -35px;        /* নিচে দেখাতে */
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s ease-in-out;
+}
+
+.tooltip-menu:hover::after {
+  opacity: 1;
+  bottom: -45px;       /* hover হলে animation effect */
+}
+</style>
+
+
 <header id="header" class="header d-flex align-items-center fixed-top" style="padding: 12px;">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
@@ -59,8 +86,8 @@
               {% endfor %}
             </ul>
           </li>
-          <li><a href="/csr_section/">Csr</a></li>
-          <li><a href="/aen_section/">Aen</a></li>
+          <li><a href="/csr_section/" class="tooltip-menu" data-title="Corporate Social Responsibility">Csr</a></li>
+          <li><a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">Aen</a></li>
           <li><a href="/career/">Career</a></li>
           <li><a href="/contact/">Contact</a></li>
           <li><a href="index.html"></a></li>
