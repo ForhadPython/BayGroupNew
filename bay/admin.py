@@ -254,14 +254,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
     ordering = ('-created_at',)
 
-    fieldsets = (
-        (None, {
-            'fields': ('name', 'email', 'subject', 'message')
-        }),
-        ('Contact Info', {
-            'fields': ('address', 'phone1', 'phone2')
-        }),
-        ('Status', {
-            'fields': ('is_read', 'created_at')
-        }),
-    )
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ("email", "call_us", "address")
+    search_fields = ("email", "call_us", "address")
+    list_filter = ("email",)

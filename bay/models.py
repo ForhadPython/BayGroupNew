@@ -272,20 +272,27 @@ class CareerOpportunity(models.Model):
 
 
 # @@@@@  Contact Model @@@@@@@@@@
+
+class ContactInfo(models.Model):
+    address = models.CharField(max_length=200)
+    email = models.EmailField()
+    call_us = models.CharField(max_length=12)
+    message = models.CharField(max_length=12)
+
+    def __str__(self):
+        return f"{self.email} - {self.call_us}"
+
+
 class ContactMessage(models.Model):
-    address = models.CharField(max_length=200, default="Contact Address")
-    phone1 = models.TextField(help_text="Contact phone1")
-    phone2 = models.TextField(help_text="Contact phone2")
     name = models.CharField(max_length=150)
     email = models.EmailField()
-    subject = CKEditor5Field()
-    message = CKEditor5Field()
-    created_at = models.DateTimeField(default=timezone.now)  # Add this!
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
     is_read = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} - {self.subject}"
-
 
 # @@@@@ End Contact Model @@@@@@@@@@
 
