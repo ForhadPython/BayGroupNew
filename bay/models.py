@@ -276,8 +276,8 @@ class CareerOpportunity(models.Model):
 class ContactInfo(models.Model):
     address = models.CharField(max_length=200)
     email = models.EmailField()
-    call_us = models.CharField(max_length=12)
-    message = models.CharField(max_length=12)
+    phone = models.CharField(max_length=12)
+    mobile = models.CharField(max_length=12)
 
     def __str__(self):
         return f"{self.email} - {self.call_us}"

@@ -256,6 +256,5 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ("email", "call_us", "address")
-    search_fields = ("email", "call_us", "address")
-    list_filter = ("email",)
+    list_display = ('address', 'email', 'phone', 'mobile')
+    search_fields = ('address', 'email', 'phone', 'mobile')
