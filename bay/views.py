@@ -147,6 +147,7 @@ def aen_view(request):
 # ===================== CAREER PAGE =====================
 def career_view(request):
     jobs = CareerOpportunity.objects.filter(is_active=True, status='active').order_by('order')
+    join_us_section = JoinUs.objects.filter(is_active=True).first()
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
@@ -159,6 +160,7 @@ def career_view(request):
         'contact_info': contact_info,
         'social_media': social_media,
         'business_page_view': business_page_view,
+        'join_us_section':join_us_section
     }
     return render(request, 'career.html', context)
 
