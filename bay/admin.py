@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+
 from .models import *
 # ------------------------------
 # Image Preview Helper
@@ -65,10 +67,17 @@ class OurPartnerAdmin(admin.ModelAdmin):
 # ------------------------------
 @admin.register(JoinUs)
 class JoinUsAdmin(admin.ModelAdmin):
-    list_display = ("title", "order", "is_active", image_preview)
+    list_display = ("title", "order", "is_active", "image_preview")
     search_fields = ("title",)
     ordering = ("order",)
-    readonly_fields = (image_preview,)
+    readonly_fields = ("image_preview",)
+
+    def image_preview(self, obj):
+        if obj.background_image:
+            return mark_safe(f'<img src="{obj.background_image.url}" width="120" style="border-radius:5px;" />')
+        return "No Image"
+
+    image_preview.short_description = "Preview"
 
 
 # ------------------------------

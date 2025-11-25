@@ -5,6 +5,42 @@
 <style>
 {background: #fff !important; transition: none !important;}
 #header .navmenu ul li a {color: #000 !important;}
+
+  /* Make all contact info boxes same height */
+  .info-item {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+      /* FIXED SIZE & VERTICAL CENTERING */
+      min-height: 180px; /* Adjust size if needed */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .info-item i {
+      font-size: 32px;
+      color: #0d6efd;
+      margin-bottom: 10px;
+  }
+
+  .info-item h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600;
+  }
+
+  .info-item p {
+      margin: 0;
+      color: #444;
+  }
+  .g-4, .gy-4 {
+    --bs-gutter-y: 0.5rem;
+}
+
 </style>
 
 <main class="main" style="margin: 5%;">
@@ -23,7 +59,7 @@
       <div class="row gy-4">
 
         <!-- LEFT SIDE CONTACT INFO -->
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="--bs-gutter-y: 0.5rem;">
           <div class="row gy-4">
 
             <!-- Address -->
@@ -66,7 +102,7 @@
         </div>
 
         <!-- RIGHT SIDE FORM -->
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="--bs-gutter-y: 0.5rem;">
 
           <!-- SUCCESS MESSAGE -->
           {% if success %}
