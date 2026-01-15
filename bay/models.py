@@ -280,7 +280,7 @@ class ContactInfo(models.Model):
     mobile = models.CharField(max_length=12)
 
     def __str__(self):
-        return f"{self.email} - {self.call_us}"
+        return f"{self.email} - {self.phone}"
 
 
 class ContactMessage(models.Model):

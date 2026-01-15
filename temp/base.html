@@ -87,7 +87,15 @@
             </ul>
           </li>
           <li><a href="/csr_section/" class="tooltip-menu" data-title="Corporate Social Responsibility">Csr</a></li>
-          <li><a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">Aen</a></li>
+
+          {% if aen_posts %}
+          <li>
+            <a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">
+              Aen
+            </a>
+          </li>
+          {% endif %}
+<!--          <li><a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">Aen</a></li>-->
           <li><a href="/career/">Career</a></li>
           <li><a href="/contact/">Contact</a></li>
           <li><a href="index.html"></a></li>
