@@ -56,58 +56,57 @@
 
 .tooltip-menu:hover::after {
   opacity: 1;
-  bottom: -45px;       /* hover হলে animation effect */
+  bottom: -45px;
 }
 </style>
 
 
-<header id="header" class="header d-flex align-items-center fixed-top" style="padding: 12px;">
-    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <!-- <h1 class="sitename">Append</h1><span>.</span> -->
-       <div class="text-md-start">
-        <a href="/" style="display:inline-block;">
-            <img src="{% static 'assets/img/logo.png' %}" alt="Constra" style="max-height:60px; margin-left:-350px !important;">
-        </a>
-       </div>
-      </a>
+  <header id="header" class="header d-flex align-items-center fixed-top" style="padding: 12px;">
+  <div class="container position-relative d-flex align-items-center">
 
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/key_management/">Key Management</a></li>
-          <li class="dropdown"><a href="#"><span>Our Partners</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              {% for pages in business_page_view %}
+    <!-- Logo (Left side) -->
+    <a href="/" class="logo d-flex align-items-center">
+      <img src="{% static 'assets/img/logo.png' %}" alt="Constra" style="max-height:60px;">
+    </a>
+
+    <!-- Nav Menu (Right side) -->
+    <nav id="navmenu" class="navmenu ms-auto">
+      <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/key_management/">Key Management</a></li>
+
+        <li class="dropdown">
+          <a href="#"><span>Our Partners</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            {% for pages in business_page_view %}
               <li><a href="{% url 'business_page' pages.page_name %}">{{ pages.page_name }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-          <li><a href="/csr_section/" class="tooltip-menu" data-title="Corporate Social Responsibility">Csr</a></li>
+            {% endfor %}
+          </ul>
+        </li>
 
-          {% if aen_posts %}
-          <li>
-            <a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">
-              Aen
-            </a>
-          </li>
-          {% endif %}
-<!--          <li><a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">Aen</a></li>-->
-          <li><a href="/career/">Career</a></li>
-          <li><a href="/contact/">Contact</a></li>
-          <li><a href="index.html"></a></li>
-          <li><a href="index.html"></a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+        <li>
+          <a href="/csr_section/" class="tooltip-menu" data-title="Corporate Social Responsibility">Csr</a>
+        </li>
 
-      <!-- <a class="btn-getstarted" href="index.html#about">Get Started</a> -->
+        {% if aen_posts %}
+        <li>
+          <a href="/aen_section/" class="tooltip-menu" data-title="Achievements & Events (News)">
+            Aen
+          </a>
+        </li>
+        {% endif %}
 
-    </div>
-  </header>
+        <li><a href="/career/">Career</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+
+  </div>
+</header>
+
 
 
 {% block content %}
