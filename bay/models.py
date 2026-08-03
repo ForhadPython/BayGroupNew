@@ -10,7 +10,11 @@ class HomeBanner(models.Model):
     background_image = models.ImageField(upload_to='Carousel/', help_text="Background image for the banner")
     primary_button_text = models.CharField(max_length=100, default='Our Services')
     primary_button_link = models.URLField(max_length=300, default='#')
+    order = models.PositiveIntegerField(default=0, help_text="Controls display order (lower number shows first)")
     is_active = models.BooleanField(default=True, help_text="Show or hide this slide")
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return self.title
@@ -272,20 +276,27 @@ class CareerOpportunity(models.Model):
 
 
 # @@@@@  Contact Model @@@@@@@@@@
+
+class ContactInfo(models.Model):
+    address = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=12)
+    mobile = models.CharField(max_length=12)
+
+    def __str__(self):
+        return f"{self.email} - {self.phone}"
+
+
 class ContactMessage(models.Model):
-    address = models.CharField(max_length=200, default="Contact Address")
-    phone1 = models.TextField(help_text="Contact phone1")
-    phone2 = models.TextField(help_text="Contact phone2")
     name = models.CharField(max_length=150)
     email = models.EmailField()
-    subject = CKEditor5Field()
-    message = CKEditor5Field()
-    created_at = models.DateTimeField(default=timezone.now)  # Add this!
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
     is_read = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} - {self.subject}"
-
 
 # @@@@@ End Contact Model @@@@@@@@@@
 
@@ -348,3 +359,24 @@ class BusinessPageDetail(models.Model):
         return self.title
 
 # @@@@@ Sister Concern @@@@@@@@@@
+
+# @@@@@ Our Partner @@@@@@@@@@
+class PartnerPageName(models.Model):
+    page_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.page_name
+
+
+class PartnerPageDetail(models.Model):
+    page_title = models.CharField(max_length=200)
+    image_1 = models.ImageField(upload_to="partner/", null=True, blank=True)
+    image_2 = models.ImageField(upload_to="partner/", null=True, blank=True)
+    title = models.CharField(max_length=200)
+    body = CKEditor5Field()
+    partner_p = models.ForeignKey(PartnerPageName, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+# @@@@@ End Our Partner @@@@@@@@@@

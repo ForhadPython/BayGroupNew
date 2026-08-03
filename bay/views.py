@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import *
 
@@ -12,7 +14,7 @@ from django.shortcuts import render
 
 def home_view(request):
     # Home page sections
-    banners = HomeBanner.objects.filter(is_active=True)
+    banners = HomeBanner.objects.filter(is_active=True).order_by('order')
     about_section = HomeAboutSection.objects.filter(is_active=True).first()
     history_headlines = HistoryHeadline.objects.filter(is_active=True).first()  # NEW
     histories = History.objects.filter(is_active=True).order_by('order')
@@ -28,7 +30,7 @@ def home_view(request):
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
-    social_media = FooterSocialMedia.objects.first() 
+    social_media = FooterSocialMedia.objects.first()
 
     context = {
         'banners': banners,
@@ -145,6 +147,7 @@ def aen_view(request):
 # ===================== CAREER PAGE =====================
 def career_view(request):
     jobs = CareerOpportunity.objects.filter(is_active=True, status='active').order_by('order')
+    join_us_section = JoinUs.objects.filter(is_active=True).first()
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
@@ -157,6 +160,7 @@ def career_view(request):
         'contact_info': contact_info,
         'social_media': social_media,
         'business_page_view': business_page_view,
+        'join_us_section':join_us_section
     }
     return render(request, 'career.html', context)
 
@@ -176,45 +180,45 @@ def career_detail_view(request, pk):
 
 
 # ===================== CONTACT PAGE =====================
+
 def contact_view(request):
-    success = False
+    # Footer + Contact info
+    context = {
+        "footer_about": FooterAbout.objects.first(),
+        "useful_links": FooterUsefulLink.objects.all(),
+        "contact_info": FooterContactInfo.objects.first(),
+        "social_media": FooterSocialMedia.objects.all(),
+        "business_page_view": BusinessPageName.objects.all(),
+        "page_contact_info": ContactInfo.objects.first(),
+        "success": request.GET.get("success") == "1",
+    }
 
-    # Footer and business menu
-    footer_about = FooterAbout.objects.first()
-    useful_links = FooterUsefulLink.objects.all()
-    contact_info = FooterContactInfo.objects.first()
-    social_media = FooterSocialMedia.objects.all()
-    business_page_view = BusinessPageName.objects.all()
-
+    # Handle Form Submit
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        subject = request.POST.get("subject")
-        message = request.POST.get("message")
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        subject = request.POST.get("subject", "").strip()
+        message = request.POST.get("message", "").strip()
 
-        # Save to database
+        # Basic Validation
+        if not name or not email or not subject or not message:
+            messages.error(request, "All fields are required.")
+            return redirect("/contact/")
+
+        # Save the message
         ContactMessage.objects.create(
             name=name,
             email=email,
             subject=subject,
             message=message,
-            phone1="",
-            phone2="",
-            address="",
             created_at=timezone.now(),
+            is_read=False,
         )
-        success = True
 
-    context = {
-        "footer_about": footer_about,
-        "useful_links": useful_links,
-        "contact_info": contact_info,
-        "social_media": social_media,
-        "business_page_view": business_page_view,
-        "success": success,
-    }
+        return redirect("/contact/?success=1")
 
     return render(request, "contact.html", context)
+
 
 
 
@@ -252,3 +256,26 @@ def BusinessPageView(request, name):
         "social_media": social_media,
     }
     return render(request, "business_page_details.html", context)
+
+
+def PartnerPageView(request, name):
+    partner_page = PartnerPageName.objects.filter(page_name=name).first()
+    partner_data = PartnerPageDetail.objects.filter(partner_p=partner_page).first()
+    partner_page_view = PartnerPageName.objects.all()
+    business_page_view = BusinessPageName.objects.all()
+
+    footer_about = FooterAbout.objects.first()
+    useful_links = FooterUsefulLink.objects.all()
+    contact_info = FooterContactInfo.objects.first()
+    social_media = FooterSocialMedia.objects.first()
+    context = {
+        "partner_page": partner_page,
+        "partner_data": partner_data,
+        "partner_page_view": partner_page_view,
+        "business_page_view": business_page_view,
+        "footer_about": footer_about,
+        "useful_links": useful_links,
+        "contact_info": contact_info,
+        "social_media": social_media,
+    }
+    return render(request, "partner_page_details.html", context)

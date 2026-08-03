@@ -13,7 +13,68 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* Beautiful Modal Design */
+.modal-content {
+    border-radius: 18px;
+    border: none;
+    padding: 10px 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    animation: popupFade 0.3s ease-out;
+}
+
+@keyframes popupFade {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* UPDATED HEADER (Close button visible + title centered) */
+.modal-header {
+    border-bottom: none;
+    width: 100%;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0.8;
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding-top: 5px;
+    padding-bottom: 25px;
+}
+
+.modal-body img {
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+/* Background blur */
+.modal-backdrop.show {
+    backdrop-filter: blur(4px);
+}
 </style>
+
 
 <main class="main" style="margin-top: 7%;">
 
@@ -42,7 +103,7 @@
               </h2>
 
               <!-- Truncated Description -->
-              <p class="truncate-3">{{ item.description|safe }}</p>
+              <p class="truncate-3">{{ item.description|striptags }}</p>
 
               <!-- Read More Button -->
               <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#aenModal{{ item.id }}">
@@ -53,23 +114,24 @@
           </div>
 
           <!-- Popup Modal -->
-          <div class="modal fade" id="aenModal{{ item.id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-              <div class="modal-content">
+            <!-- Popup Modal -->
+            <div class="modal fade" id="aenModal{{ item.id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
 
-                <div class="modal-header">
-                  <h5 class="modal-title">{{ item.title }}</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ item.title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body">
+                    <img src="{{ item.image.url }}" class="img-fluid mb-3" alt="{{ item.title }}">
+                    <div>{{ item.description|safe }}</div>
+                  </div>
+
                 </div>
-
-                <div class="modal-body">
-                  <img src="{{ item.image.url }}" class="img-fluid mb-3" alt="{{ item.title }}">
-                  <div>{{ item.description|safe }}</div>
-                </div>
-
               </div>
             </div>
-          </div>
           {% endfor %}
 
         </div>

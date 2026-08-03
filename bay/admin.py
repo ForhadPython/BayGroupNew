@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+
 from .models import *
 # ------------------------------
 # Image Preview Helper
@@ -15,7 +17,9 @@ image_preview.short_description = "Preview"
 # HomeBanner Admin
 # ------------------------------
 class HomeBannerAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image_preview', 'is_active')
+    list_display = ('title', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    ordering = ('order',)
 
     def image_preview(self, obj):
         if obj.background_image:
@@ -65,10 +69,17 @@ class OurPartnerAdmin(admin.ModelAdmin):
 # ------------------------------
 @admin.register(JoinUs)
 class JoinUsAdmin(admin.ModelAdmin):
-    list_display = ("title", "order", "is_active", image_preview)
+    list_display = ("title", "order", "is_active", "image_preview")
     search_fields = ("title",)
     ordering = ("order",)
-    readonly_fields = (image_preview,)
+    readonly_fields = ("image_preview",)
+
+    def image_preview(self, obj):
+        if obj.background_image:
+            return mark_safe(f'<img src="{obj.background_image.url}" width="120" style="border-radius:5px;" />')
+        return "No Image"
+
+    image_preview.short_description = "Preview"
 
 
 # ------------------------------
@@ -254,14 +265,20 @@ class ContactMessageAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at',)
     ordering = ('-created_at',)
 
-    fieldsets = (
-        (None, {
-            'fields': ('name', 'email', 'subject', 'message')
-        }),
-        ('Contact Info', {
-            'fields': ('address', 'phone1', 'phone2')
-        }),
-        ('Status', {
-            'fields': ('is_read', 'created_at')
-        }),
-    )
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ('address', 'email', 'phone', 'mobile')
+    search_fields = ('address', 'email', 'phone', 'mobile')
+
+
+@admin.register(PartnerPageName)
+class PartnerPageNameAdmin(admin.ModelAdmin):
+    list_display = ('id', 'page_name')
+    search_fields = ('page_name',)
+
+
+@admin.register(PartnerPageDetail)
+class PartnerPageDetailAdmin(admin.ModelAdmin):
+    list_display = ('id', 'page_title', 'title', 'partner_p')
+    search_fields = ('page_title', 'title')
+    list_filter = ('partner_p',)

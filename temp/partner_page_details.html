@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+{background: #fff !important; transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
+.main {
+    padding: 60px 0;
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+.page-title h2 {
+    font-weight: 800;
+    color: #1a1a1a;
+}
+.page-title p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Portfolio Slider */
+.portfolio-details-slider {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+.portfolio-details-slider img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: 15px;
+}
+.portfolio-details-slider img:hover {
+    transform: scale(1.05);
+}
+
+/* Swiper Pagination */
+.swiper-pagination-bullet {
+    background: #007bff;
+    opacity: 0.7;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/* Portfolio Description */
+.portfolio-description h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #222;
+}
+.portfolio-description p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+.portfolio-description div {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .main {
+        padding: 40px 20px;
+    }
+    .page-title h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<main class="main" style="margin-top: 7%;">
+
+    <!-- Dynamic Page Title -->
+    <div class="page-title" data-aos="fade-up">
+        <div class="container section-title" style="padding-bottom: 0px !important;">
+            <h2>{{ partner_data.page_title }}</h2>
+            <p>{{ partner_data.title }}</p>
+        </div>
+    </div>
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+        <div class="container" data-aos="fade-up">
+
+            {% if partner_data.image_1 or partner_data.image_2 %}
+            <div class="portfolio-details-slider swiper init-swiper">
+
+                <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 700,
+                  "autoplay": { "delay": 4000 },
+                  "slidesPerView": "auto",
+                  "spaceBetween": 20,
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+                </script>
+
+                <div class="swiper-wrapper align-items-center">
+                    {% if partner_data.image_1 %}
+                    <div class="swiper-slide">
+                        <img src="{{ partner_data.image_1.url }}" alt="">
+                    </div>
+                    {% endif %}
+                    {% if partner_data.image_2 %}
+                    <div class="swiper-slide">
+                        <img src="{{ partner_data.image_2.url }}" alt="">
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+            {% endif %}
+
+            <!-- Dynamic Body Content -->
+            <div class="row justify-content-center">
+                <div class="col-lg-12" data-aos="fade-up">
+                    <div class="portfolio-description">
+                        <h2>{{ partner_data.title }}</h2>
+                        <p>{{ partner_data.body|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

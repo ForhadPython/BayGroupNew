@@ -1,128 +1,75 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <style>
-  body { background: #fff !important; transition: none !important; }
-  #header .navmenu ul li a { color: #000 !important; }
-
-  /* CSR Section Styling */
-  .csr-section {
-      background: #f9f9f9;
-      padding: 80px 0;
-  }
-  .csr-section .section-title h2 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #222;
-  }
-  .csr-section .section-title p {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.8;
-      max-width: 700px;
-      margin: auto;
-  }
-  .csr-item {
-      background: #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .csr-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  }
-  .csr-item img {
-      width: 100%;
-      border-radius: 0;
-      max-height: 400px;
-      object-fit: cover;
-  }
-  .csr-item-content {
-      padding: 30px 40px;
-  }
-  .csr-item-content h4 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      color: #222;
-  }
-  .csr-item-content p {
-      font-size: 15px;
-      color: #555;
-      line-height: 1.8;
-  }
-  .csr-item-content .btn-see-more {
-      margin-top: 20px;
-      padding: 10px 30px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 25px;
-      background: linear-gradient(90deg, #e84545, #ff5e62);
-      color: #fff;
-      transition: all 0.3s;
-  }
-  .csr-item-content .btn-see-more:hover {
-      background: linear-gradient(90deg, #ff5e62, #e84545);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(232, 69, 69, 0.4);
-      text-decoration: none;
-  }
-
-  @media (max-width: 768px) {
-      .csr-item-content { padding: 20px; text-align: center; }
-      .csr-item img { max-height: 300px; }
-  }
+{background: #fff !important;  transition: none !important;}
+#header .navmenu ul li a {color: #000 !important;}
 </style>
 
-<main class="main">
-
-  <!-- CSR Section -->
-  <section class="csr-section">
-    <div class="container">
-
-      <!-- Section Title -->
-      <div class="section-title text-center" data-aos="fade-up">
+<main class="main" style="margin: 7%;">
+  <!-- Features Section -->
+  <section id="features" class="features section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
         <h2>{{ csr_page_headline.title }}</h2>
-        <p>{{ csr_page_headline.description }}</p>
-      </div>
+        <p>{{ csr_page_headline.description|safe }}</p>
+    </div>
 
-      <div class="row gy-5 mt-5">
-        {% for item in csr_items %}
-        <div class="col-lg-12 csr-item d-flex flex-lg-row flex-column align-items-center">
-          {% if forloop.counter|divisibleby:2 %}
-            <div class="col-lg-6 csr-item-content order-lg-1 order-2" data-aos="fade-up">
-              <h4>{{ item.title }}</h4>
-              <p>{{ item.description|safe|linebreaks }}</p>
-              {% if item.button_link %}
-              <a href="{{ item.button_link }}" target="_blank" class="btn btn-see-more">See More</a>
-              {% endif %}
-            </div>
-            <div class="col-lg-6 order-lg-2 order-1" data-aos="fade-left">
-              <img src="{{ item.image.url }}" alt="{{ item.title }}">
-            </div>
-          {% else %}
-            <div class="col-lg-6 order-lg-1 order-1" data-aos="fade-right">
-              <img src="{{ item.image.url }}" alt="{{ item.title }}">
-            </div>
-            <div class="col-lg-6 csr-item-content order-lg-2 order-2" data-aos="fade-up">
-              <h4>{{ item.title }}</h4>
-              <p>{{ item.description|safe|linebreaks }}</p>
-              {% if item.button_link %}
-              <a href="{{ item.button_link }}" target="_blank" class="btn btn-see-more">See More</a>
-              {% endif %}
-            </div>
-          {% endif %}
-        </div>
-        {% endfor %}
-      </div>
+    <div class="container">
+      {% for item in csr_items %}
+      <div class="row gy-4 align-items-stretch justify-content-between features-item">
+        {% if forloop.counter|divisibleby:2 %}
+          <!-- Image Left, Content Right -->
+          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.title }}">
+            {% endif %}
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+            <h3>{{ item.title }}</h3>
+            {{ item.description|safe }}
 
+            {% if item.list_items %}
+            <ul>
+              {% for li in item.list_items %}
+                <li><i class="bi bi-check"></i> <span>{{ li }}</span></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if item.button_text %}
+            <a href="{{ item.button_link }}" class="btn btn-get-started align-self-start">See More</a>
+            {% endif %}
+          </div>
+
+        {% else %}
+          <!-- Content Left, Image Right -->
+          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+            <h3>{{ item.title }}</h3>
+            {{ item.description|safe }}
+
+            {% if item.list_items %}
+            <ul>
+              {% for li in item.list_items %}
+                <li><i class="bi bi-check"></i> <span>{{ li }}</span></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if item.button_text %}
+            <a href="{{ item.button_link }}" class="btn btn-get-started align-self-start">{{ item.button_text }}</a>
+            {% endif %}
+          </div>
+          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.title }}">
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
   </section>
-
 </main>
 
 {% endblock %}
