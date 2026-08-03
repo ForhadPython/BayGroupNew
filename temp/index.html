@@ -320,76 +320,38 @@
 
 
 <!-- ======= Recent Posts Section ======= -->
-<!--<section id="recent-posts" class="recent-posts section">-->
-<!--  &lt;!&ndash; Section Title &ndash;&gt;-->
-<!--  <div class="container section-title" data-aos="fade-up">-->
-<!--  <h2>{{ aen_headline_home.title }}</h2>-->
-<!--  <p>{{ aen_headline_home.description|safe }}</p>-->
-<!--  </div>&lt;!&ndash; End Section Title &ndash;&gt;-->
+<section id="recent-posts" class="recent-posts section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+  <h2>{{ aen_headline_home.title }}</h2>
+  <p>{{ aen_headline_home.description|safe }}</p>
+  </div><!-- End Section Title -->
 
-<!--  <div class="container">-->
-<!--    <div class="row gy-4">-->
-<!--      {% for post in aen_posts %}-->
-<!--        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'0' }}00">-->
-<!--          <article>-->
-<!--            <div class="post-img">-->
-<!--              <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">-->
-<!--            </div>-->
-<!--            <h2 class="title">-->
-<!--              {% if post.link %}-->
-<!--                <a href="{{ post.link }}">{{ post.title }}</a>-->
-<!--              {% else %}-->
-<!--                {{ post.title }}-->
-<!--              {% endif %}-->
-<!--            </h2>-->
-<!--            <p>{{ post.description|safe|truncatewords:25 }}</p>-->
-<!--            {% if post.link %}-->
-<!--              <a href="{{ post.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>-->
-<!--            {% endif %}-->
-<!--          </article>-->
-<!--        </div>-->
-<!--      {% endfor %}-->
-<!--    </div>&lt;!&ndash; End recent posts list &ndash;&gt;-->
-<!--  </div>-->
-<!--</section>&lt;!&ndash; /Recent Posts Section &ndash;&gt;-->
-
- {% if aen_posts %}
-  <section id="recent-posts" class="recent-posts section">
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>{{ aen_headline_home.title }}</h2>
-      <p>{{ aen_headline_home.description|safe }}</p>
-    </div>
-
-    <div class="container">
-      <div class="row gy-4">
-        {% for post in aen_posts %}
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}00">
-            <article>
-              <div class="post-img">
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
-              </div>
-              <h2 class="title">
-                {% if post.link %}
-                  <a href="{{ post.link }}">{{ post.title }}</a>
-                {% else %}
-                  {{ post.title }}
-                {% endif %}
-              </h2>
-              <p>{{ post.description|safe|truncatewords:25 }}</p>
+  <div class="container">
+    <div class="row gy-4">
+      {% for post in aen_posts %}
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'0' }}00">
+          <article>
+            <div class="post-img">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+            </div>
+            <h2 class="title">
               {% if post.link %}
-                <a href="{{ post.link }}" class="read-more">
-                  <span>See More</span><i class="bi bi-arrow-right"></i>
-                </a>
+                <a href="{{ post.link }}">{{ post.title }}</a>
+              {% else %}
+                {{ post.title }}
               {% endif %}
-            </article>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  {% endif %}
-
+            </h2>
+            <p>{{ post.description|safe|truncatewords:25 }}</p>
+            {% if post.link %}
+              <a href="{{ post.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
+            {% endif %}
+          </article>
+        </div>
+      {% endfor %}
+    </div><!-- End recent posts list -->
+  </div>
+</section><!-- /Recent Posts Section -->
 
 
 

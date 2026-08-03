@@ -1,6 +1,4 @@
-from django.contrib import messages
-
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import *
 
@@ -147,7 +145,6 @@ def aen_view(request):
 # ===================== CAREER PAGE =====================
 def career_view(request):
     jobs = CareerOpportunity.objects.filter(is_active=True, status='active').order_by('order')
-    join_us_section = JoinUs.objects.filter(is_active=True).first()
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
@@ -160,7 +157,6 @@ def career_view(request):
         'contact_info': contact_info,
         'social_media': social_media,
         'business_page_view': business_page_view,
-        'join_us_section':join_us_section
     }
     return render(request, 'career.html', context)
 
@@ -180,45 +176,45 @@ def career_detail_view(request, pk):
 
 
 # ===================== CONTACT PAGE =====================
-
 def contact_view(request):
-    # Footer + Contact info
-    context = {
-        "footer_about": FooterAbout.objects.first(),
-        "useful_links": FooterUsefulLink.objects.all(),
-        "contact_info": FooterContactInfo.objects.first(),
-        "social_media": FooterSocialMedia.objects.all(),
-        "business_page_view": BusinessPageName.objects.all(),
-        "page_contact_info": ContactInfo.objects.first(),
-        "success": request.GET.get("success") == "1",
-    }
+    success = False
 
-    # Handle Form Submit
+    # Footer and business menu
+    footer_about = FooterAbout.objects.first()
+    useful_links = FooterUsefulLink.objects.all()
+    contact_info = FooterContactInfo.objects.first()
+    social_media = FooterSocialMedia.objects.all()
+    business_page_view = BusinessPageName.objects.all()
+
     if request.method == "POST":
-        name = request.POST.get("name", "").strip()
-        email = request.POST.get("email", "").strip()
-        subject = request.POST.get("subject", "").strip()
-        message = request.POST.get("message", "").strip()
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
 
-        # Basic Validation
-        if not name or not email or not subject or not message:
-            messages.error(request, "All fields are required.")
-            return redirect("/contact/")
-
-        # Save the message
+        # Save to database
         ContactMessage.objects.create(
             name=name,
             email=email,
             subject=subject,
             message=message,
+            phone1="",
+            phone2="",
+            address="",
             created_at=timezone.now(),
-            is_read=False,
         )
+        success = True
 
-        return redirect("/contact/?success=1")
+    context = {
+        "footer_about": footer_about,
+        "useful_links": useful_links,
+        "contact_info": contact_info,
+        "social_media": social_media,
+        "business_page_view": business_page_view,
+        "success": success,
+    }
 
     return render(request, "contact.html", context)
-
 
 
 
