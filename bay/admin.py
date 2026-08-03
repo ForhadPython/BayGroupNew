@@ -57,11 +57,17 @@ class HistoryAdmin(admin.ModelAdmin):
 # ------------------------------
 @admin.register(OurPartner)
 class OurPartnerAdmin(admin.ModelAdmin):
-    list_display = ("title", "order", "is_active", image_preview)
+    list_display = ("title", "order", "is_active", image_preview, "background_preview")
     list_filter = ("is_active",)
     search_fields = ("title",)
     ordering = ("order",)
-    readonly_fields = (image_preview,)
+    readonly_fields = (image_preview, "background_preview")
+
+    def background_preview(self, obj):
+        if obj.background_image:
+            return format_html('<img src="{}" width="120" style="border-radius:5px;" />', obj.background_image.url)
+        return "No background image (logo will be used)"
+    background_preview.short_description = "Background Preview"
 
 
 # ------------------------------
@@ -100,6 +106,23 @@ class GroupBrandLogoAdmin(admin.ModelAdmin):
     list_display = ('id', 'image_preview', 'order', 'is_active')
     list_editable = ('order', 'is_active')
     search_fields = ('id',)
+    ordering = ('order',)
+
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="100" />', obj.image.url)
+        return "-"
+    image_preview.short_description = 'Logo Preview'
+
+
+# ------------------------------
+# Our Customer Logo Admin
+# ------------------------------
+@admin.register(OurCustomerLogo)
+class OurCustomerLogoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('title',)
     ordering = ('order',)
 
     def image_preview(self, obj):

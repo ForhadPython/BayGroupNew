@@ -186,18 +186,110 @@
     <p>{{ partners_headline.description }}</p>
     </div>
 
+    <style>
+      .services .partner-item {
+        position: relative;
+        border-radius: 18px;
+        padding: 30px;
+        height: 100%;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow: hidden;
+        background-color: #1a1a1a;
+        background-image: var(--partner-img);
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 4px 18px rgba(20,20,20,0.10);
+        transition: box-shadow .35s ease, transform .35s ease;
+      }
+      .services .partner-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.45) 45%, rgba(10,10,10,0.92) 100%);
+        transition: background .35s ease;
+      }
+      .services .partner-item::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: 0; top: 0;
+        width: 5px;
+        background: linear-gradient(180deg, #c8102e, #ff5a5f);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform .35s ease;
+        z-index: 2;
+      }
+      .services .partner-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px rgba(20,20,20,0.28);
+      }
+      .services .partner-item:hover::before {
+        background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.95) 100%);
+      }
+      .services .partner-item:hover::after {
+        transform: scaleY(1);
+      }
+      .services .partner-content {
+        position: relative;
+        z-index: 1;
+      }
+      .services .partner-logo-badge {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        background-color: rgba(255,255,255,0.95);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 68%;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      }
+      .services .partner-title a {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.15rem;
+        text-decoration: none;
+        transition: color .25s ease;
+      }
+      .services .partner-item:hover .partner-title a {
+        color: #ff8b8f;
+      }
+      .services .partner-desc {
+        color: rgba(255,255,255,0.82);
+        font-size: 0.92rem;
+        line-height: 1.7;
+        margin: 10px 0 14px;
+      }
+      .services .partner-more {
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .services .partner-more i {
+        transition: transform .3s ease;
+      }
+      .services .partner-item:hover .partner-more i {
+        transform: translateX(5px);
+      }
+    </style>
+
     <div class="container">
       <div class="row gy-4">
         {% for partner in partners %}
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="{{ partner.aos_delay }}">
-          <div class="service-item d-flex">
-            <div class="icon flex-shrink-0">
-              <img src="{{ partner.image.url }}" alt="{{ partner.title }}" style="width:50px; height:50px;">
-            </div>
-            <div>
-              <h4 class="title"><a href="{{ partner.link }}" class="stretched-link">{{ partner.title }}</a></h4>
-              <p class="description">{{ partner.description|safe|truncatewords:30 }}</p>
-              <a href="{{ partner.link }}" class="read-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'100' }}">
+          <div class="partner-item" style="--partner-img: url('{% if partner.background_image %}{{ partner.background_image.url }}{% else %}{{ partner.image.url }}{% endif %}');">
+            <div class="partner-content">
+              <div class="partner-logo-badge" style="background-image:url('{{ partner.image.url }}');"></div>
+              <h4 class="partner-title"><a href="{{ partner.link }}" class="stretched-link">{{ partner.title }}</a></h4>
+              <p class="partner-desc">{{ partner.description|safe|truncatewords:30 }}</p>
+              <a href="{{ partner.link }}" class="partner-more"><span>See More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -316,6 +408,91 @@
   </div>
 </section>
 <!-- ======= End Brand Logo Slider Section ======= -->
+
+
+<!-- ======= Our Customers Logo Slider Section ======= -->
+<section id="customer-logos" style="background:#ffffff;padding:60px 0;">
+  <style>
+    .customer-slider .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* FIXED SIZE LOGO AREA – NO BOX, CLEAN LOOK */
+    .customer-logo-box {
+        width: 160px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        background: none !important;
+    }
+
+    .customer-logo-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        transition: all 0.4s ease;
+    }
+
+    .customer-logo-box img:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.10);
+    }
+  </style>
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Our Customers</h2>
+<!--    <p>Trusted by businesses across Bangladesh</p>-->
+  </div>
+
+  <div class="container" data-aos="fade-up" style="text-align:center;">
+    <div class="swiper customerSwiper customer-slider" style="width:100%; padding-bottom:40px;">
+      <div class="swiper-wrapper">
+
+        {% for logo in customer_logos %}
+          <div class="swiper-slide">
+            <div class="customer-logo-box">
+              {% if logo.link %}
+                <a href="{{ logo.link }}" target="_blank">
+                  <img src="{{ logo.image.url }}" alt="{{ logo.title }}">
+                </a>
+              {% else %}
+                <img src="{{ logo.image.url }}" alt="{{ logo.title }}">
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ======= End Our Customers Logo Slider Section ======= -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper(".customerSwiper", {
+      slidesPerView: 5,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        320: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        1024: { slidesPerView: 5 }
+      }
+    });
+  });
+</script>
 
 
 

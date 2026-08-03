@@ -64,6 +64,11 @@ class OurPartnerHeadline(models.Model):
 
 class OurPartner(models.Model):
     image = models.ImageField(upload_to='partners/', help_text="Upload partner logo or image")
+    background_image = models.ImageField(
+        upload_to='partners/backgrounds/',
+        blank=True, null=True,
+        help_text="Optional large background image for the partner card. If left empty, the logo image above will be used instead."
+    )
     title = models.CharField(max_length=255)
     description = CKEditor5Field()
     link = models.URLField(default="#", blank=True, null=True)
@@ -116,6 +121,20 @@ class GroupBrandLogo(models.Model):
 
     def __str__(self):
         return f"Logo {self.id} - Order {self.order}"
+
+
+class OurCustomerLogo(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True, help_text="Customer/company name (used as image alt text)")
+    image = models.ImageField(upload_to='customer_logos/', help_text="Upload customer logo")
+    link = models.URLField(max_length=300, blank=True, null=True, help_text="Optional link when the logo is clicked")
+    order = models.PositiveIntegerField(default=0, help_text="Controls display order (lower number shows first)")
+    is_active = models.BooleanField(default=True, help_text="Show or hide this logo")
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title or f"Customer Logo {self.id}"
 
 
 class CsrHeadline(models.Model):
