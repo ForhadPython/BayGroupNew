@@ -64,7 +64,27 @@
   overflow-y: auto;      /* Vertical scroll */
   overflow-x: hidden;    /* Horizontal scroll বন্ধ */
 }
+
+/* Safety net: if main.js fails to remove #preloader for any reason,
+   it must never sit on top of the page intercepting clicks. */
+#preloader {
+  pointer-events: none !important;
+}
 </style>
+
+<script>
+  // Safety net: force-remove the preloader shortly after load even if
+  // main.js's own removal script fails (JS error, slow asset, etc.),
+  // so it can never keep blocking clicks on the page underneath it.
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.remove();
+      }
+    }, 2000);
+  });
+</script>
 
 
   <header id="header" class="header d-flex align-items-center fixed-top" style="padding: 12px;">

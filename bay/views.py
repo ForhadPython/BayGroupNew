@@ -19,7 +19,7 @@ def home_view(request):
     history_headlines = HistoryHeadline.objects.filter(is_active=True).first()  # NEW
     histories = History.objects.filter(is_active=True).order_by('order')
     partners_headline = OurPartnerHeadline.objects.filter(is_active=True).first()  # NEW
-    partners = OurPartner.objects.filter(is_active=True).order_by('order')[:8]
+    partners = OurPartner.objects.filter(is_active=True).order_by('order')[:20]
     join_us_section = JoinUs.objects.filter(is_active=True).first()
     csr_section = CsrHome.objects.filter(is_active=True).first()
     brand_logos = GroupBrandLogo.objects.filter(is_active=True).order_by('order')
@@ -254,7 +254,7 @@ def footer_partial(request):
     })
 
 def BusinessPageView(request, name):
-    business_page = BusinessPageName.objects.filter(page_name=name).first()
+    business_page = get_object_or_404(BusinessPageName, page_name=name)
     business_data = BusinessPageDetail.objects.filter(business_p=business_page).first()
     business_page_view = BusinessPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
@@ -278,7 +278,7 @@ def BusinessPageView(request, name):
 
 
 def PartnerPageView(request, name):
-    partner_page = PartnerPageName.objects.filter(page_name=name).first()
+    partner_page = get_object_or_404(PartnerPageName, page_name=name)
     partner_data = PartnerPageDetail.objects.filter(partner_p=partner_page).first()
     partner_page_view = PartnerPageName.objects.all()
     business_page_view = BusinessPageName.objects.all()
