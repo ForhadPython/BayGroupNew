@@ -301,7 +301,7 @@ class ContactInfo(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20,blank=True, null=True)
     mobile = models.CharField(max_length=20,blank=True, null=True)
-    jb = models.CharField(max_length=400, blank=True, null=True)
+    jv = models.TextField(max_length=400, blank=True, null=True)
 
     def __str__(self):
         return f"{self.email} - {self.phone}"

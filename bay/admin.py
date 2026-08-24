@@ -290,8 +290,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'email', 'phone', 'mobile', 'jb')
-    search_fields = ('address', 'email', 'phone', 'mobile', 'jb')
+    list_display = ('address', 'email', 'phone', 'mobile', 'jv')
+    search_fields = ('address', 'email', 'phone', 'mobile', 'jv')
 
 
 @admin.register(PartnerPageName)
