@@ -210,8 +210,8 @@ class FooterUsefulLinkAdmin(admin.ModelAdmin):
 # ===== Footer Contact Info =====
 @admin.register(FooterContactInfo)
 class FooterContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'phone', 'email')
-    search_fields = ('address', 'phone', 'email')
+    list_display = ('address', 'phone', 'email', 'jb')
+    search_fields = ('address', 'phone', 'email', 'jb')
 
 # ===== Footer Social Media =====
 @admin.register(FooterSocialMedia)
@@ -290,8 +290,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'email', 'phone', 'mobile')
-    search_fields = ('address', 'email', 'phone', 'mobile')
+    list_display = ('address', 'email', 'phone', 'mobile', 'jb')
+    search_fields = ('address', 'email', 'phone', 'mobile', 'jb')
 
 
 @admin.register(PartnerPageName)

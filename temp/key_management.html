@@ -2,68 +2,248 @@
 {% load static %}
 {% block content %}
 <style>
-body { background: #fff !important; }
+:root{
+  --km-navy: #0f1b2d;
+  --km-navy-2: #16263f;
+  --km-red: #C62828;
+  --km-red-light: #e5534b;
+  --km-gold: #c9a24b;
+  --km-text-soft: #6b7280;
+}
+
+body { background: #fafafa !important; }
 
 /* Menu color fix */
 #header .navmenu ul li a { color: #000 !important; }
 
-/* Modern Popup Design */
+/* ---------- Section Header ---------- */
+#team.team.section {
+  padding: 70px 0 90px;
+}
+
+#team .section-title h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--km-navy);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+#team .section-title h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--km-red), var(--km-gold));
+  border-radius: 3px;
+}
+
+#team .section-title p {
+  color: var(--km-text-soft);
+  font-size: 1.02rem;
+  max-width: 640px;
+  margin: 24px auto 0;
+  line-height: 1.8;
+}
+
+/* ---------- Premium Member Card (typography-led, no image/avatar) ---------- */
+.km-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 46px 34px 36px;
+  text-align: center;
+  height: 100%;
+  border: 1px solid rgba(15, 27, 45, 0.06);
+  box-shadow: 0 6px 24px rgba(15, 27, 45, 0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow: hidden;
+}
+
+.km-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--km-navy), var(--km-red), var(--km-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease;
+}
+
+.km-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 22px 45px rgba(15, 27, 45, 0.14);
+  border-color: rgba(198, 40, 40, 0.15);
+}
+
+.km-card:hover::before { transform: scaleX(1); }
+
+/* Small kicker above the name */
+.km-kicker {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--km-gold);
+  margin-bottom: 14px;
+}
+
+.km-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: var(--km-navy);
+  margin-bottom: 14px;
+}
+
+.km-divider {
+  width: 46px;
+  height: 2px;
+  margin: 0 auto 16px;
+  background: linear-gradient(90deg, var(--km-red), var(--km-gold));
+  border-radius: 2px;
+}
+
+.km-role {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--km-red);
+  margin-bottom: 18px;
+}
+
+.km-desc {
+  color: var(--km-text-soft);
+  font-size: 0.94rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.km-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(15, 27, 45, 0.12);
+  color: var(--km-navy);
+  font-size: 1rem;
+  margin-bottom: 14px;
+  transition: 0.25s ease;
+}
+
+.km-link:hover {
+  background: var(--km-navy);
+  color: #fff;
+  border-color: var(--km-navy);
+}
+
+.km-more-btn {
+  background: transparent;
+  color: var(--km-navy);
+  border: 1.5px solid var(--km-navy);
+  border-radius: 30px;
+  padding: 8px 26px;
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.3px;
+  transition: 0.3s ease;
+}
+
+.km-more-btn:hover {
+  background: var(--km-navy);
+  color: #fff;
+}
+
+/* ---------- Premium Modal (no image) ---------- */
 .modal-content {
-    border-radius: 22px !important;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.25);
-    animation: popupZoom 0.25s ease-out;
+  border-radius: 24px !important;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: popupZoom 0.28s ease-out;
+  overflow: hidden;
 }
 
 @keyframes popupZoom {
-    0% { transform: scale(0.85); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-.modal-header {
-    border-bottom: none !important;
-    padding: 20px 30px !important;
+.km-modal-header {
+  background: linear-gradient(135deg, var(--km-navy) 0%, var(--km-navy-2) 60%, var(--km-red) 140%);
+  padding: 34px 40px;
+  border: none;
+  position: relative;
 }
 
-.modal-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #222;
+.km-modal-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.14);
+  border: 1.5px solid rgba(201, 162, 75, 0.7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.km-modal-header .modal-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.km-modal-header .km-modal-role {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.km-modal-header .btn-close {
+  filter: invert(1) brightness(2);
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  opacity: 0.85;
 }
 
 .modal-body {
-    padding: 35px;
+  padding: 38px 40px 42px;
 }
 
-/* Responsive content wrapper */
-.member-desc-wrapper {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    align-items: flex-start;
-}
-
-.member-desc-wrapper img {
-    border-radius: 15px;
-    max-width: 260px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.member-desc-text {
-    flex: 1;
-    min-width: 240px;
-}
-
-/* Better Close Button */
-.btn-close {
-    filter: brightness(0);
-    transform: scale(1.2);
+.modal-body p {
+  text-align: justify;
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: #3d3d3d;
 }
 
 @media(max-width: 768px){
-  .modal-body { padding: 25px; }
+  .modal-body { padding: 28px; }
+  .km-modal-header { padding: 26px 26px; }
   .modal-content { border-radius: 18px !important; }
+  .km-card { padding: 34px 22px 26px; }
 }
 </style>
 
@@ -84,30 +264,23 @@ body { background: #fff !important; }
         {% for member in team_members %}
         <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:1 }}00">
 
-          <div class="member-img">
-            {% if member.image %}
-              <img src="{{ member.image.url }}" class="img-fluid" alt="{{ member.name }}">
-            {% else %}
-              <img src="{% static 'assets/img/team/default.jpg' %}" class="img-fluid" alt="No Image">
-            {% endif %}
-            <div class="social">
-              {% if member.link %}
-                <a href="{{ member.link }}" target="_blank"><i class="bi bi-link-45deg"></i></a>
-              {% else %}
-                <a href="#"><i class="bi bi-person"></i></a>
-              {% endif %}
-            </div>
-          </div>
+          <div class="km-card">
+            <div class="km-avatar">{{ member.name|slice:":1" }}</div>
 
-          <div class="member-info text-center">
-            <h4>{{ member.name }}</h4>
-            <span>{{ member.designation|safe }}</span>
+            <h4 class="km-name">{{ member.name }}</h4>
+            <span class="km-role">{{ member.designation|striptags }}</span>
+
+            {% if member.link %}
+              <div>
+                <a href="{{ member.link }}" target="_blank" class="km-link">
+                  <i class="bi bi-link-45deg"></i>
+                </a>
+              </div>
+            {% endif %}
 
             {% if member.description %}
-              <p>{{ member.description|striptags|truncatewords:20 }}</p>
-              <!-- MODERN POPUP BUTTON -->
-              <button class="btn btn-sm mt-2"
-                      style="background:#C62828; color:white; border-radius:8px; padding:7px 18px; font-weight:600;"
+              <p class="km-desc">{{ member.description|striptags|truncatewords:20 }}</p>
+              <button class="km-more-btn"
                       data-bs-toggle="modal"
                       data-bs-target="#fullscreenModal{{ member.id }}">
                 See More
@@ -117,38 +290,22 @@ body { background: #fff !important; }
 
         </div>
 
-        <!-- MODERN POPUP -->
+        <!-- PREMIUM POPUP (no image) -->
         <div class="modal fade" id="fullscreenModal{{ member.id }}" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
 
-              <div class="modal-header">
-                <h5 class="modal-title">{{ member.name }}</h5>
+              <div class="km-modal-header d-flex align-items-center">
+                <div class="km-modal-avatar">{{ member.name|slice:":1" }}</div>
+                <div>
+                  <h5 class="modal-title">{{ member.name }}</h5>
+                  <span class="km-modal-role">{{ member.designation|striptags }}</span>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
 
               <div class="modal-body">
-
-                <div class="member-desc-wrapper">
-
-                  <!-- Image -->
-                  {% if member.image %}
-                    <img src="{{ member.image.url }}" alt="">
-                  {% else %}
-                    <img src="{% static 'assets/img/team/default.jpg' %}" alt="">
-                  {% endif %}
-
-                  <!-- Text -->
-                  <div class="member-desc-text">
-                    <h5 style="font-weight:700; margin-bottom:10px;">{{ member.designation|safe }}</h5>
-
-                    <p style="text-align:justify; font-size:16px; line-height:1.8;">
-                      {{ member.description|safe }}
-                    </p>
-                  </div>
-
-                </div>
-
+                <p>{{ member.description|safe }}</p>
               </div>
 
             </div>

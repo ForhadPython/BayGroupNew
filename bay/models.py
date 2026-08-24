@@ -9,7 +9,7 @@ class HomeBanner(models.Model):
     subtitle = models.CharField(max_length=255, blank=True, null=True, help_text="Subtitle or tagline")
     background_image = models.ImageField(upload_to='Carousel/', help_text="Background image for the banner")
     primary_button_text = models.CharField(max_length=100, default='Our Services')
-    primary_button_link = models.CharField(max_length=300, default='#', help_text="Full URL (https://...) or internal path (e.g. /about/, /business_page/bay-emporium)")
+    primary_button_link = models.URLField(max_length=300, default='#')
     order = models.PositiveIntegerField(default=0, help_text="Controls display order (lower number shows first)")
     is_active = models.BooleanField(default=True, help_text="Show or hide this slide")
 
@@ -25,7 +25,7 @@ class HomeAboutSection(models.Model):
     description = CKEditor5Field('Description')
     image = models.ImageField(upload_to='About/', blank=True, null=True)
     button_text = models.CharField(max_length=100, default='Learn More')
-    button_link = models.CharField(max_length=300, default='#', help_text="Full URL (https://...) or internal path (e.g. /about/)")
+    button_link = models.URLField(max_length=300, default='#')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -71,7 +71,7 @@ class OurPartner(models.Model):
     )
     title = models.CharField(max_length=255)
     description = CKEditor5Field()
-    link = models.CharField(max_length=300, default="#", blank=True, null=True, help_text="Full URL (https://...) or internal path")
+    link = models.URLField(default="#", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -85,7 +85,7 @@ class JoinUs(models.Model):
     title = models.CharField(max_length=255, default="Join Us")
     description = CKEditor5Field()
     button_text = models.CharField(max_length=100, default="See More")
-    button_link = models.CharField(max_length=300, default="#", help_text="Full URL (https://...) or internal path")
+    button_link = models.URLField(max_length=300, default="#")
     background_image = models.ImageField(upload_to='join_us/', blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -103,7 +103,7 @@ class CsrHome(models.Model):
     description = CKEditor5Field('Description')
     image = models.ImageField(upload_to='csr/', blank=True, null=True)
     button_text = models.CharField(max_length=100, default="Get Started")
-    button_link = models.CharField(max_length=300, default="#", help_text="Full URL (https://...) or internal path")
+    button_link = models.URLField(max_length=300, default="#")
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -126,7 +126,7 @@ class GroupBrandLogo(models.Model):
 class OurCustomerLogo(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True, help_text="Customer/company name (used as image alt text)")
     image = models.ImageField(upload_to='customer_logos/', help_text="Upload customer logo")
-    link = models.CharField(max_length=300, blank=True, null=True, help_text="Optional link when the logo is clicked (full URL or internal path)")
+    link = models.URLField(max_length=300, blank=True, null=True, help_text="Optional link when the logo is clicked")
     order = models.PositiveIntegerField(default=0, help_text="Controls display order (lower number shows first)")
     is_active = models.BooleanField(default=True, help_text="Show or hide this logo")
 
@@ -149,7 +149,7 @@ class Csr(models.Model):
     image = models.ImageField(upload_to='csr/', help_text="Main image for the csr section")
     title = models.TextField(help_text="First paragraph text")
     description = CKEditor5Field(blank=True, null=True, help_text="Second paragraph text (optional)")
-    button_link = models.CharField(max_length=300, default="", blank=True, help_text="Link for the Learn More button (full URL or internal path)")
+    button_link = models.URLField(max_length=300, default="", help_text="Link for the Learn More button")
     is_active = models.BooleanField(default=True, help_text="Show or hide this About section")
     sequence = models.PositiveIntegerField(default=0, help_text="Order of display")
 
@@ -181,7 +181,7 @@ class Aen(models.Model):
     title = models.CharField(max_length=255)
     description = CKEditor5Field('Description/AEN')
     image = models.ImageField(upload_to='aen/')
-    link = models.CharField(max_length=300, default="#", blank=True, null=True, help_text="Full URL (https://...) or internal path")
+    link = models.URLField(default="#", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -238,7 +238,7 @@ class KeyManagement(models.Model):
     name = models.CharField(max_length=200)
     designation = CKEditor5Field()
     description = CKEditor5Field()
-    link = models.CharField(max_length=300, blank=True, null=True, help_text="Full URL (https://...) or internal path")
+    link = models.URLField()
     order = models.PositiveIntegerField(default=0, help_text="Controls display order on the page.")
     is_active = models.BooleanField(default=True, help_text="Uncheck to hide this person from the website.")
 
@@ -299,8 +299,9 @@ class CareerOpportunity(models.Model):
 class ContactInfo(models.Model):
     address = models.CharField(max_length=200)
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    mobile = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20,blank=True, null=True)
+    mobile = models.CharField(max_length=20,blank=True, null=True)
+    jb = models.CharField(max_length=400, blank=True, null=True)
 
     def __str__(self):
         return f"{self.email} - {self.phone}"
@@ -342,6 +343,7 @@ class FooterContactInfo(models.Model):
     address = models.TextField()
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=255)
+    jb = models.CharField(max_length=400, blank=True, null=True, verbose_name="JV / Joint Venture Info")
 
     def __str__(self):
         return "Footer Contact Information"

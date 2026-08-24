@@ -190,6 +190,9 @@
               <p style="color: #555; margin: 0;">{{ contact_info.address }}</p>
               <p class="mt-4" style="color: #555;"><span>Phone: </span>{{ contact_info.phone }}</p>
               <p style="color: #555;">Email: <span>{{ contact_info.email }}</span></p>
+              {% if contact_info.jb %}
+              <p style="color: #555;">{{ contact_info.jb }}</p>
+              {% endif %}
             {% endif %}
           </div>
         </div>
