@@ -263,10 +263,7 @@ body { background: #fafafa !important; }
 
         {% for member in team_members %}
         <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:1 }}00">
-
           <div class="km-card">
-            <div class="km-avatar">{{ member.name|slice:":1" }}</div>
-
             <h4 class="km-name">{{ member.name }}</h4>
             <span class="km-role">{{ member.designation|striptags }}</span>
 
