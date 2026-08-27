@@ -103,7 +103,7 @@
         <li><a href="/key_management/">Key Management</a></li>
 
         <li class="dropdown">
-          <a href="#"><span>Our Concern</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <a href="#"><span>Our Concerns</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
             {% for pages in business_page_view %}
               <li><a href="{% url 'business_page' pages.page_name %}">{{ pages.page_name }}</a></li>
@@ -112,7 +112,7 @@
         </li>
 
         <li class="dropdown">
-          <a href="#"><span>Our Partner</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <a href="#"><span>Our Partners</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
             {% for pages in partner_page_view %}
               <li><a href="{% url 'partner_page' pages.page_name %}">{{ pages.page_name }}</a></li>
@@ -133,7 +133,7 @@
         {% endif %}
 
         <li><a href="/career/">Career</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/contact/">Contact Us</a></li>
       </ul>
 
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -148,77 +148,226 @@
 
 {% endblock %}
 
-<footer id="footer" class="footer position-relative light-background"
-    style="padding: 15px 0 15px 0 !important; font-family: 'Poppins', sans-serif; border-top: 1px solid #e0e0e0;">
-    <div class="container footer-top">
-      <div class="row gy-4 d-flex align-items-stretch justify-content-between"
-           style="display: flex; flex-wrap: wrap; align-items: stretch;">
-        <!-- About -->
-        <div class="col-lg-3 col-md-6 col-sm-6 footer-about d-flex flex-column justify-content-between"
-             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
-          <div>
-            {% if footer_about %}
-            <a href="{% url 'home' %}" class="logo d-flex align-items-center mb-3">
-              <img src="{{ footer_about.logo.url }}" alt="Footer Logo" style="height: 55px;">
-            </a>
-            <p style="font-size: 15px; line-height: 1.8; color: #555;">
-              {{ footer_about.description|safe }}
-            </p>
-            {% endif %}
-          </div>
-        </div>
+<footer id="footer" class="footer-premium position-relative">
+  <div class="container footer-top">
+    <div class="row gy-5">
 
-        <!-- Useful Links -->
-        <div class="col-lg-3 col-md-6 col-sm-6 footer-links d-flex flex-column justify-content-between"
-             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
-          <div>
-            <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Useful Links</h4>
-            <ul style="list-style: none; padding: 0; line-height: 2;">
-              {% for link in useful_links %}
-                <li><a href="{{ link.url }}" style="text-decoration: none; color: #555;">{{ link.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+      <!-- Brand -->
+      <div class="col-lg-3 col-md-6">
+        <a href="{% url 'home' %}" class="footer-logo d-inline-flex align-items-center mb-3">
+          <img src="{% static 'assets/img/logo.png' %}" alt="Bay Group" style="height: 48px;">
+        </a>
+        {% if footer_about %}
+        <p class="footer-tagline">{{ footer_about.description|striptags|truncatewords:22 }}</p>
+        {% endif %}
+      </div>
 
-        <!-- Contact -->
-        <div class="col-lg-3 col-md-6 col-sm-6 footer-contact d-flex flex-column justify-content-between"
-             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
-          <div>
-            <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Contact Us</h4>
-            {% if contact_info %}
-              <p style="color: #555; margin: 0;">{{ contact_info.address }}</p>
-              <p class="mt-4" style="color: #555;"><span>Phone: </span>{{ contact_info.phone }}</p>
-              <p style="color: #555;">Email: <span>{{ contact_info.email }}</span></p>
-              {% if contact_info.jb %}
-              <p style="color: #555;">{{ contact_info.jb }}</p>
-              {% endif %}
-            {% endif %}
-          </div>
-        </div>
+      <!-- Useful Links -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <h4>Useful Links</h4>
+        <ul class="footer-link-list">
+          {% for link in useful_links %}
+            <li><a href="{{ link.url }}"><i class="bi bi-chevron-right"></i>{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
 
-        <!-- Social Media -->
-        <div class="col-lg-3 col-md-6 col-sm-6 footer-links d-flex flex-column justify-content-between"
-             style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 260px;">
-          <div>
-            <h4 style="font-size: 18px; font-weight: 600; color: #000; margin-bottom: 20px;">Social Media</h4>
+      <!-- Joint Venture -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <h4>Joint Venture</h4>
+        {% if contact_info %}
+          {% if contact_info.jb %}
+          <div class="footer-jv-title">{{ contact_info.jb|safe }}</div>
+          {% endif %}
+          {% if contact_info.jv_whatsapp %}
+          <p class="footer-info-line"><i class="bi bi-telephone"></i>{{ contact_info.jv_whatsapp }}</p>
+          {% endif %}
+          {% if contact_info.jv_email %}
+          <p class="footer-info-line"><i class="bi bi-envelope"></i>{{ contact_info.jv_email }}</p>
+          {% endif %}
+        {% endif %}
+      </div>
 
-            {% if social_media %}
-              <p style="color: #555; font-size: 15px; line-height: 1.8;">{{ social_media.description }}</p>
-              <div class="social-links d-flex gap-3 mt-3">
-                <a href="{{ social_media.link_1 }}" style="font-size: 20px; color: #555; transition: 0.3s;">
-                  <i class="bi bi-facebook"></i>
-                </a>
-                <a href="{{ social_media.link_2 }}" style="font-size: 20px; color: #555; transition: 0.3s;">
-                  <i class="bi bi-linkedin"></i>
-                </a>
-              </div>
-            {% endif %}
-          </div>
-        </div>
+      <!-- Contact -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <h4>Contact Us</h4>
+        {% if contact_info %}
+          <p class="footer-info-line"><i class="bi bi-geo-alt"></i>{{ contact_info.address }}</p>
+          <p class="footer-info-line"><i class="bi bi-telephone"></i>{{ contact_info.phone }}</p>
+          <p class="footer-info-line"><i class="bi bi-envelope"></i>{{ contact_info.email }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+
+    {% if social_media %}
+    <div class="footer-social-row">
+      <p class="footer-social-text">{{ social_media.description }}</p>
+      <div class="social-links d-flex gap-2">
+        {% if social_media.link_1 %}
+        <a href="{{ social_media.link_1 }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        {% endif %}
+        {% if social_media.link_2 %}
+        <a href="{{ social_media.link_2 }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        {% endif %}
+        {% if social_media.link_3 %}
+        <a href="{{ social_media.link_3 }}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        {% endif %}
       </div>
     </div>
+    {% endif %}
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <p class="mb-0">&copy; {% now "Y" %} <strong>Bay Group</strong>. All Rights Reserved.</p>
+      <p class="mb-0 footer-bottom-links">
+        <a href="/about/">About</a><span>/</span><a href="/career/">Career</a><span>/</span><a href="/contact/">Contact</a>
+      </p>
+    </div>
+  </div>
 </footer>
+
+<style>
+.footer-premium {
+  background: #f9f9f9;
+  color: #555555;
+  font-family: 'Poppins', sans-serif;
+  padding-top: 70px;
+  border-top: 1px solid #e0e0e0;
+}
+.footer-premium .footer-top { padding-bottom: 30px; }
+.footer-premium h4 {
+  position: relative;
+  color: #32353a;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+}
+.footer-premium h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 3px;
+  background: var(--accent-color, #e84545);
+  border-radius: 2px;
+}
+.footer-premium .footer-tagline {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #777777;
+  margin-top: 4px;
+}
+.footer-premium .footer-link-list { list-style: none; padding: 0; margin: 0; }
+.footer-premium .footer-link-list li { margin-bottom: 12px; }
+.footer-premium .footer-link-list a {
+  color: #555555;
+  text-decoration: none;
+  font-size: 14.5px;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.footer-premium .footer-link-list a i {
+  font-size: 12px;
+  margin-right: 8px;
+  color: var(--accent-color, #e84545);
+  transition: transform 0.25s ease;
+}
+.footer-premium .footer-link-list a:hover {
+  color: var(--accent-color, #e84545);
+  padding-left: 4px;
+}
+.footer-premium .footer-link-list a:hover i { transform: translateX(3px); }
+.footer-premium .footer-jv-title {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #555555;
+  margin-bottom: 10px;
+}
+.footer-premium .footer-jv-title p {
+  margin: 0;
+}
+.footer-premium .footer-info-line {
+  font-size: 14.5px;
+  line-height: 1.9;
+  color: #555555;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-start;
+}
+.footer-premium .footer-info-line i {
+  color: var(--accent-color, #e84545);
+  margin-right: 10px;
+  margin-top: 3px;
+  font-size: 14px;
+}
+.footer-premium .footer-info-line p {
+  margin: 0 0 6px 0;
+}
+.footer-premium .footer-info-line p:last-child {
+  margin-bottom: 0;
+}
+.footer-premium .footer-social-row {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 10px;
+  padding-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.footer-premium .footer-social-text {
+  font-size: 14px;
+  color: #777777;
+  margin: 0;
+}
+.footer-premium .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #d8d8d8;
+  color: #555555;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.footer-premium .social-links a:hover {
+  background: var(--accent-color, #e84545);
+  border-color: var(--accent-color, #e84545);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+.footer-bottom {
+  background: #f1f1f1;
+  padding: 18px 0;
+  margin-top: 40px;
+  font-size: 13.5px;
+  color: #777777;
+  border-top: 1px solid #e0e0e0;
+}
+.footer-bottom strong { color: #32353a; }
+.footer-bottom-links a {
+  color: #777777;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.footer-bottom-links a:hover { color: var(--accent-color, #e84545); }
+.footer-bottom-links span { margin: 0 8px; color: #ccc; }
+@media (max-width: 991px) {
+  .footer-premium { padding-top: 50px; }
+  .footer-social-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

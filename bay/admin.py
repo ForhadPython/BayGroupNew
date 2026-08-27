@@ -210,14 +210,14 @@ class FooterUsefulLinkAdmin(admin.ModelAdmin):
 # ===== Footer Contact Info =====
 @admin.register(FooterContactInfo)
 class FooterContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'phone', 'email', 'jb')
-    search_fields = ('address', 'phone', 'email', 'jb')
+    list_display = ('address', 'phone', 'email', 'jb', 'jv_whatsapp', 'jv_email')
+    search_fields = ('address', 'phone', 'email', 'jb', 'jv_whatsapp', 'jv_email')
 
 # ===== Footer Social Media =====
 @admin.register(FooterSocialMedia)
 class FooterSocialMediaAdmin(admin.ModelAdmin):
-    list_display = ('link_1', 'link_2')
-    search_fields = ('link_1', 'link_2')
+    list_display = ('link_1', 'link_2', 'link_3')
+    search_fields = ('link_1', 'link_2', 'link_3')
 
 
 # ------------------------------
@@ -249,14 +249,14 @@ class KeyManagementHeadlineAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('title', 'description')
 
-@admin.register(BusinessPageName)
-class BusinessPageNameAdmin(admin.ModelAdmin):
+@admin.register(OurConcernPageName)
+class OurConcernPageNameAdmin(admin.ModelAdmin):
     list_display = ('id', 'page_name')
     search_fields = ('page_name',)
 
 
-@admin.register(BusinessPageDetail)
-class BusinessPageDetailAdmin(admin.ModelAdmin):
+@admin.register(OurConcernPageDetail)
+class OurConcernPageDetailAdmin(admin.ModelAdmin):
     list_display = ('id', 'page_title', 'title', 'business_p')
     search_fields = ('page_title', 'title')
     list_filter = ('business_p',)
@@ -291,7 +291,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'email', 'phone', 'mobile', 'jv')
-    search_fields = ('address', 'email', 'phone', 'mobile', 'jv')
+    search_fields = ('address', 'email', 'phone', 'mobile', 'jv', 'jv_whatsapp', 'jv_email')
 
 
 @admin.register(PartnerPageName)

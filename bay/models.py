@@ -302,6 +302,8 @@ class ContactInfo(models.Model):
     phone = models.CharField(max_length=20,blank=True, null=True)
     mobile = models.CharField(max_length=20,blank=True, null=True)
     jv = models.TextField(max_length=400, blank=True, null=True)
+    jv_whatsapp = models.CharField(max_length=50, blank=True, null=True, verbose_name="Joint Venture WhatsApp")
+    jv_email = models.CharField(max_length=255, blank=True, null=True, verbose_name="Joint Venture Email")
 
     def __str__(self):
         return f"{self.email} - {self.phone}"
@@ -344,6 +346,8 @@ class FooterContactInfo(models.Model):
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=255)
     jb = models.CharField(max_length=400, blank=True, null=True, verbose_name="JV / Joint Venture Info")
+    jv_whatsapp = models.CharField(max_length=50, blank=True, null=True, verbose_name="Joint Venture WhatsApp")
+    jv_email = models.CharField(max_length=255, blank=True, null=True, verbose_name="Joint Venture Email")
 
     def __str__(self):
         return "Footer Contact Information"
@@ -351,8 +355,9 @@ class FooterContactInfo(models.Model):
 
 class FooterSocialMedia(models.Model):
     description = models.TextField()
-    link_1 = models.CharField(max_length=255,null=True, blank=True)
-    link_2 = models.CharField(max_length=255,null=True, blank=True)
+    link_1 = models.CharField(max_length=255,null=True, blank=True, verbose_name="Facebook Link")
+    link_2 = models.CharField(max_length=255,null=True, blank=True, verbose_name="LinkedIn Link")
+    link_3 = models.CharField(max_length=255,null=True, blank=True, verbose_name="YouTube Link")
 
     def __str__(self):
         return self.link_1
@@ -361,20 +366,20 @@ class FooterSocialMedia(models.Model):
 
 
 # @@@@@ Sister Concern @@@@@@@@@@
-class BusinessPageName(models.Model):
+class OurConcernPageName(models.Model):
     page_name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.page_name
 
 
-class BusinessPageDetail(models.Model):
+class OurConcernPageDetail(models.Model):
     page_title = models.CharField(max_length=200)
     image_1 = models.ImageField(upload_to="business/", null=True, blank=True)
     image_2 = models.ImageField(upload_to="business/", null=True, blank=True)
     title = models.CharField(max_length=200)
     body = CKEditor5Field()
-    business_p = models.ForeignKey(BusinessPageName, on_delete=models.CASCADE)
+    business_p = models.ForeignKey(OurConcernPageName, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

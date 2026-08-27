@@ -37,6 +37,10 @@
       margin: 0;
       color: #444;
   }
+
+  .info-item p + p {
+      margin-top: 4px;
+  }
   .g-4, .gy-4 {
     --bs-gutter-y: 0.5rem;
 }
@@ -94,7 +98,15 @@
               <div class="info-item" data-aos="fade" data-aos-delay="500">
                 <i class="bi bi-briefcase"></i>
                 <h3>Joint Venture</h3>
+                {% if page_contact_info.jv_whatsapp %}
+                <p>Whatsapp: {{ page_contact_info.jv_whatsapp }}</p>
+                {% endif %}
+                {% if page_contact_info.jv_email %}
+                <p>Email: {{ page_contact_info.jv_email }}</p>
+                {% endif %}
+                {% if page_contact_info.jv and not page_contact_info.jv_whatsapp and not page_contact_info.jv_email %}
                 <p>{{ page_contact_info.jv }}</p>
+                {% endif %}
               </div>
             </div>
 

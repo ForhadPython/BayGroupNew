@@ -25,7 +25,7 @@ def home_view(request):
     brand_logos = GroupBrandLogo.objects.filter(is_active=True).order_by('order')
     customer_logos = OurCustomerLogo.objects.filter(is_active=True).order_by('order')
     aen_posts = Aen.objects.filter(is_active=True).order_by('order')
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
     aen_headline_home = AenHeadlineHome.objects.filter(is_active=True).first()  # NEW
     # Footer section (Jusing new models)
@@ -66,7 +66,7 @@ def about_view(request):
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
     about_headline = AboutItemHeadline.objects.first()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
 
     return render(request, 'about.html', {
@@ -89,7 +89,7 @@ def key_management_view(request):
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
     key_management_headline = KeyManagementHeadline.objects.first()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
 
     return render(request, 'key_management.html', {
@@ -112,7 +112,7 @@ def csr_view(request):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
 
     return render(request, 'csr.html', {
@@ -137,7 +137,7 @@ def aen_view(request):
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
     # Business page
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
     # CSR headline (if this is needed)
     src_headline = CsrHeadline.objects.first()
@@ -164,7 +164,7 @@ def career_view(request):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
     context = {
         'jobs': jobs,
@@ -187,7 +187,7 @@ def career_detail_view(request, pk):
     useful_links = FooterUsefulLink.objects.all()
     contact_info = FooterContactInfo.objects.first()
     social_media = FooterSocialMedia.objects.all()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
     context = {'job': job,'footer_about':footer_about,'useful_links':useful_links,
                                           'contact_info':contact_info,'social_media':social_media,
@@ -204,7 +204,7 @@ def contact_view(request):
         "useful_links": FooterUsefulLink.objects.all(),
         "contact_info": FooterContactInfo.objects.first(),
         "social_media": FooterSocialMedia.objects.all(),
-        "business_page_view": BusinessPageName.objects.all(),
+        "business_page_view": OurConcernPageName.objects.all(),
         "partner_page_view": PartnerPageName.objects.all(),
         "page_contact_info": ContactInfo.objects.first(),
         "success": request.GET.get("success") == "1",
@@ -254,9 +254,9 @@ def footer_partial(request):
     })
 
 def BusinessPageView(request, name):
-    business_page = get_object_or_404(BusinessPageName, page_name=name)
-    business_data = BusinessPageDetail.objects.filter(business_p=business_page).first()
-    business_page_view = BusinessPageName.objects.all()
+    business_page = get_object_or_404(OurConcernPageName, page_name=name)
+    business_data = OurConcernPageDetail.objects.filter(business_p=business_page).first()
+    business_page_view = OurConcernPageName.objects.all()
     partner_page_view = PartnerPageName.objects.all()
 
     # Footer section (using new models)
@@ -281,7 +281,7 @@ def PartnerPageView(request, name):
     partner_page = get_object_or_404(PartnerPageName, page_name=name)
     partner_data = PartnerPageDetail.objects.filter(partner_p=partner_page).first()
     partner_page_view = PartnerPageName.objects.all()
-    business_page_view = BusinessPageName.objects.all()
+    business_page_view = OurConcernPageName.objects.all()
 
     footer_about = FooterAbout.objects.first()
     useful_links = FooterUsefulLink.objects.all()
