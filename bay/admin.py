@@ -37,7 +37,7 @@ admin.site.register(HomeBanner, HomeBannerAdmin)
 # ------------------------------
 @admin.register(HomeAboutSection)
 class HomeAboutSectionAdmin(admin.ModelAdmin):
-    list_display = ( "is_active", image_preview)
+    list_display = ("is_active", image_preview)
     readonly_fields = (image_preview,)
 
 
@@ -249,10 +249,17 @@ class KeyManagementHeadlineAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     search_fields = ('title', 'description')
 
+
+# ------------------------------
+# Our Concern (Business) Pages
+# ------------------------------
 @admin.register(OurConcernPageName)
 class OurConcernPageNameAdmin(admin.ModelAdmin):
-    list_display = ('id', 'page_name')
-    search_fields = ('page_name',)
+    list_display = ('id', 'page_name', 'slug', 'position')
+    list_editable = ('position',)
+    search_fields = ('page_name', 'slug')
+    prepopulated_fields = {'slug': ('page_name',)}
+    ordering = ('position', 'id')
 
 
 @admin.register(OurConcernPageDetail)
@@ -294,10 +301,16 @@ class ContactInfoAdmin(admin.ModelAdmin):
     search_fields = ('address', 'email', 'phone', 'mobile', 'jv', 'jv_whatsapp', 'jv_email')
 
 
+# ------------------------------
+# Partner Pages
+# ------------------------------
 @admin.register(PartnerPageName)
 class PartnerPageNameAdmin(admin.ModelAdmin):
-    list_display = ('id', 'page_name')
-    search_fields = ('page_name',)
+    list_display = ('id', 'page_name', 'slug', 'position')
+    list_editable = ('position',)
+    search_fields = ('page_name', 'slug')
+    prepopulated_fields = {'slug': ('page_name',)}
+    ordering = ('position', 'id')
 
 
 @admin.register(PartnerPageDetail)

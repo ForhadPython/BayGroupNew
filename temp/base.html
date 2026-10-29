@@ -4,9 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Bay Group</title>
-  <meta name="description" content="">
+  <title>{% block title %}Bay Group{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Bay Group - Leading business group in Bangladesh{% endblock %}">
   <meta name="keywords" content="">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <meta property="og:title" content="{% block og_title %}Bay Group{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Bay Group{% endblock %}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:type" content="website">
 
     {% load static %}
 
@@ -106,7 +112,7 @@
           <a href="#"><span>Our Concerns</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
             {% for pages in business_page_view %}
-              <li><a href="{% url 'business_page' pages.page_name %}">{{ pages.page_name }}</a></li>
+              <li><a href="{{ pages.get_absolute_url }}">{{ pages.page_name }}</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -115,7 +121,7 @@
           <a href="#"><span>Our Partners</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
             {% for pages in partner_page_view %}
-              <li><a href="{% url 'partner_page' pages.page_name %}">{{ pages.page_name }}</a></li>
+              <li><a href="{{ pages.get_absolute_url }}">{{ pages.page_name }}</a></li>
             {% endfor %}
           </ul>
         </li>

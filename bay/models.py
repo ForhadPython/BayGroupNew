@@ -1,7 +1,22 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 # Create your models here.
+
+
+def generate_unique_slug(instance, source):
+    """Source text theke unique slug banay (bay-emporium-ltd, bay-emporium-ltd-2 ...)."""
+    base = slugify(source) or "page"
+    slug = base
+    i = 2
+    Model = instance.__class__
+    while Model.objects.filter(slug=slug).exclude(pk=instance.pk).exists():
+        slug = f"{base}-{i}"
+        i += 1
+    return slug
+
 
 # @@@@@ Home Model @@@@@@@@@@
 class HomeBanner(models.Model):
@@ -360,7 +375,7 @@ class FooterSocialMedia(models.Model):
     link_3 = models.CharField(max_length=255,null=True, blank=True, verbose_name="YouTube Link")
 
     def __str__(self):
-        return self.link_1
+        return self.link_1 or "Footer Social Media"
 
 # @@@@@ End Footer Model @@@@@@@@@@
 
@@ -368,6 +383,25 @@ class FooterSocialMedia(models.Model):
 # @@@@@ Sister Concern @@@@@@@@@@
 class OurConcernPageName(models.Model):
     page_name = models.CharField(max_length=100)
+    slug = models.SlugField(
+        max_length=120, unique=True, blank=True,
+        help_text="Khali rakhle page name theke auto toiri hobe"
+    )
+    position = models.PositiveIntegerField(
+        default=0,
+        help_text="Menu-te kon position-e dekhabe (choto number age ashbe)"
+    )
+
+    class Meta:
+        ordering = ['position', 'id']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = generate_unique_slug(self, self.page_name)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('business_page', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.page_name
@@ -389,6 +423,25 @@ class OurConcernPageDetail(models.Model):
 # @@@@@ Our Partner @@@@@@@@@@
 class PartnerPageName(models.Model):
     page_name = models.CharField(max_length=100)
+    slug = models.SlugField(
+        max_length=120, unique=True, blank=True,
+        help_text="Khali rakhle page name theke auto toiri hobe"
+    )
+    position = models.PositiveIntegerField(
+        default=0,
+        help_text="Menu position (choto number age ashbe)"
+    )
+
+    class Meta:
+        ordering = ['position', 'id']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = generate_unique_slug(self, self.page_name)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('partner_page', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.page_name
