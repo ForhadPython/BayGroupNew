@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block robots %}{% if business_page.slug == 'bay-emporium-ltd' %}noindex, nofollow{% else %}index, follow{% endif %}{% endblock %}
+
 {% block content %}
 
 <style>

@@ -7,7 +7,8 @@ class BusinessSitemap(Sitemap):
     priority = 0.8
 
     def items(self):
-        return OurConcernPageName.objects.all()
+        # noindex kora page sitemap-e rakha thik na
+        return OurConcernPageName.objects.exclude(slug='bay-emporium-ltd')
 
 
 class PartnerSitemap(BusinessSitemap):
